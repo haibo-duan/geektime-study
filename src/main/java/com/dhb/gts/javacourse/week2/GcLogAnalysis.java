@@ -1,4 +1,4 @@
-package com.dhb.geektimestudy.kimmking.week2;
+package com.dhb.gts.javacourse.week2;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;

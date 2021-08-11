@@ -1,4 +1,4 @@
-package com.dhb.geektimestudy.kimmking.week1;
+package com.dhb.gts.javacourse.week1;
 
 import java.util.Base64;
 

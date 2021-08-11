@@ -1,4 +1,4 @@
-package com.dhb.geektimestudy.kimmking.week1;
+package com.dhb.gts.javacourse.week1;
 
 
 import java.lang.reflect.Field;
@@ -10,7 +10,8 @@ import java.util.List;
 public class JvmClassLoaderPrintPath {
 
 	public static void main(String[] args) {
-		URL[]  urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
+//		URL[]  urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
+		URL[]  urls = new URL[100];
 		System.out.println("启动类加载器");
 		for(URL url : urls) {
 			System.out.println(" ====> "+url.toExternalForm());
@@ -30,6 +31,7 @@ public class JvmClassLoaderPrintPath {
 		}else {
 			System.out.println(name + " ClassLoader -> null");
 		}
+		
 	}
 	
 	private static void printURLForClassLoader(ClassLoader classLoader) {
