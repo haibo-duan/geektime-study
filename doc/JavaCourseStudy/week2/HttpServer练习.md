@@ -189,3 +189,74 @@ PS D:\>
 ```
 ![HttpServer03 sleep 1ms 测试结果](../../images/HttpServer03%20sleep%201ms%20测试结果.png)
 
+# 3.NettyHttpServer
+[NettyHttpServer.java](../../../src/main/java/com/dhb/gts/javacourse/week2/NettyHttpServer.java)
+## 3.1 不增加sleep
+```
+PS D:\> sb -u http://127.0.0.1:8808 -c 40 -N 60
+Starting at 2021/8/12 20:34:39
+[Press C to stop the test]
+314648  (RPS: 4901.5)
+---------------Finished!----------------
+Finished at 2021/8/12 20:35:44 (took 00:01:04.2492745)
+Status 200:    314648
+
+RPS: 5152.6 (requests/second)
+Max: 212ms
+Min: 0ms
+Avg: 0.5ms
+
+  50%   below 0ms
+  60%   below 0ms
+  70%   below 0ms
+  80%   below 0ms
+  90%   below 0ms
+  95%   below 0ms
+  98%   below 5ms
+  99%   below 9ms
+99.9%   below 85ms
+```
+测试结果
+![NettyServer测试结果](../../images/NettyServer测试结果.png)
+
+## 3.2 增加sleep
+增加1ms sleep
+```
+PS D:\> sb -u http://127.0.0.1:8808 -c 40 -N 60
+Starting at 2021/8/12 20:37:33
+[Press C to stop the test]
+266075  (RPS: 4134.5)
+---------------Finished!----------------
+Finished at 2021/8/12 20:38:38 (took 00:01:04.3843402)
+Status 200:    266076
+
+RPS: 4359.3 (requests/second)
+Max: 244ms
+Min: 0ms
+Avg: 2.4ms
+
+  50%   below 1ms
+  60%   below 1ms
+  70%   below 1ms
+  80%   below 1ms
+  90%   below 2ms
+  95%   below 8ms
+  98%   below 30ms
+  99%   below 50ms
+99.9%   below 113ms
+PS D:\>
+```
+测试结果
+![NettyServer sleep 1ms 测试结果](../../images/NettyServer%20sleep%201ms%20测试结果.png)
+
+# 4.总结
+测试结果汇总如下：
+
+| 测试类型    | HttpServer01 | HttpServer02 | HttpServer03 | NettyHttpServer |
+|:-----------|:-------------|:-------------|:-------------|:----------------|
+| 不增加sleep | 2022.1       | 1735.7       | 2058.5       | 5152.6          |
+| sleep(1ms) | 798.8        | 1645.5       | 2041.7       | 4359.3          |
+
+可以发现，当不增加sleep的时候，不采用多线程的效率高于多线程。这种情况非常理想。不符合现实场景。但是也说明多线程的线程切换占用了系统的开销。
+增加了sleep之后，这符合我们的期望结果，阻塞式的响应非常低，只有700多rps。这能区分增加线程池的优势。
+采用netty之后，效果明显提升了很多，netty采用了异步非阻塞IO。
