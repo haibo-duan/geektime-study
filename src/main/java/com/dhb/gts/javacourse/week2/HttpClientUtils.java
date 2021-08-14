@@ -17,7 +17,7 @@ public class HttpClientUtils {
 	
 
 	public static void main(String[] args) {
-		System.out.println(HttpClientUtils.httpGet("http://127.0.0.1:8808/test"));
+		System.out.println(HttpClientUtils.httpGet("http://127.0.0.1:8801"));
 	}
 	
 	private static RequestConfig config = null;

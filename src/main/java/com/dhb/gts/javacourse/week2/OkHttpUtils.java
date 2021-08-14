@@ -12,7 +12,7 @@ import java.io.IOException;
 public class OkHttpUtils {
 
 	public static void main(String[] args) {
-		System.out.println(OkHttpUtils.httpGet("http://127.0.0.1:8808/test"));
+		System.out.println(OkHttpUtils.httpGet("http://127.0.0.1:8801"));
 	}
 	
 	public static String httpGet(String url) {
