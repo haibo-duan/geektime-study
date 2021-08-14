@@ -1,5 +1,6 @@
 package com.dhb.gts.javacourse.week2;
 
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -35,8 +36,9 @@ public class OkHttpUtils {
 		OkHttpClient client = new OkHttpClient();
 		String result = null;
 		try {
-			MediaType type = MediaType.parse("application/json;charset=utf-8");
-			RequestBody body = RequestBody.create(type,strParam);
+			MediaType type = MediaType.Companion.parse("application/json;charset=utf-8");
+			//create方法已经过时 用Compaion来解决
+			RequestBody body = RequestBody.Companion.create(strParam,type);
 			Request request = new Request.Builder()
 					.url(url)
 					.post(body)
