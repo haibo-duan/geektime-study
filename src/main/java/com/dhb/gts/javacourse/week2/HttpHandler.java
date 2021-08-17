@@ -29,6 +29,7 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
 		try {
 			FullHttpRequest fullRequest = (FullHttpRequest) msg;
 			String uri = fullRequest.uri();
+			System.out.println("NettyServer被请求，uri:"+uri);
 			if(uri.contains("/test") ) {
 				handlerTest(fullRequest,ctx,"Hello ...");
 			}else {
