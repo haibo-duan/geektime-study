@@ -13,12 +13,12 @@ public class NettyServerApplication {
 
 		//代理服务端port
 		String proxyPort = System.getProperty("proxyPort","8888");
-		String proxyServers = System.getProperty("proxyServers","http://localhost:8801,http://localhost:8802");
+		String proxyServers = System.getProperty("proxyServers","http://127.0.0.1:8802,http://127.0.0.1:8801");
 		
 		int port = Integer.parseInt(proxyPort);
 		
 		System.out.println(GATEWAY_NAME + " " + GATEWAY_VERSION +" starting...");
-		HttpInboundServer server = new HttpInboundServer(port, Arrays.asList(proxyServers));
+		HttpInboundServer server = new HttpInboundServer(port, Arrays.asList(proxyServers.split(",")));
 		System.out.println(GATEWAY_NAME + " " + GATEWAY_VERSION +" started at http://127.0.0.1:" + port + " for server:" + server.toString());
 
 		try {
