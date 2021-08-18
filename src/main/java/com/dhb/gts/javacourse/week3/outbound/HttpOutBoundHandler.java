@@ -4,7 +4,7 @@ import com.dhb.gts.javacourse.week3.filter.HeaderHttpResponseFilter;
 import com.dhb.gts.javacourse.week3.filter.HttpRequestFilter;
 import com.dhb.gts.javacourse.week3.filter.HttpResponseFilter;
 import com.dhb.gts.javacourse.week3.router.HttpEndpointRouter;
-import com.dhb.gts.javacourse.week3.router.RandomHttpEndpointRouter;
+import com.dhb.gts.javacourse.week3.router.RoundRibbonHttpEndpointRouter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 
@@ -23,7 +23,7 @@ public abstract class HttpOutBoundHandler {
 	
 
 	HttpResponseFilter filter = new HeaderHttpResponseFilter();
-	HttpEndpointRouter router = new RandomHttpEndpointRouter();
+	HttpEndpointRouter router = new RoundRibbonHttpEndpointRouter();
 
 	int cores = Runtime.getRuntime().availableProcessors();
 
