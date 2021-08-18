@@ -1,5 +1,7 @@
 package com.dhb.gts.javacourse.week3.outbound;
 
+import com.dhb.gts.javacourse.week3.filter.HttpResponseFilter;
+import com.dhb.gts.javacourse.week3.filter.ResponseFilterChain;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
@@ -26,12 +28,14 @@ public class GeneralHandler extends ChannelInboundHandlerAdapter {
 	private final FullHttpRequest fullRequest;
 	private final ChannelHandlerContext inboundCtx;
 	private final Map<String, String> head = new HashMap<>();
+	private final ResponseFilterChain responseChain;
 	private Integer resLength = 0;
 	private String respContent = "";
 
-	public GeneralHandler(FullHttpRequest fullRequest, ChannelHandlerContext inboundCtx) {
+	public GeneralHandler(FullHttpRequest fullRequest, ChannelHandlerContext inboundCtx, ResponseFilterChain responseChain) {
 		this.fullRequest = fullRequest;
 		this.inboundCtx = inboundCtx;
+		this.responseChain = responseChain;
 	}
 
 	@Override
@@ -96,6 +100,7 @@ public class GeneralHandler extends ChannelInboundHandlerAdapter {
 			response = new DefaultFullHttpResponse(HTTP_1_1, NO_CONTENT);
 			ctx.close();
 		} finally {
+			responseChain.filter(response,responseChain);
 			if (fullRequest != null) {
 				if (!HttpUtil.isKeepAlive(fullRequest)) {
 					ctx.write(response).addListener(ChannelFutureListener.CLOSE);

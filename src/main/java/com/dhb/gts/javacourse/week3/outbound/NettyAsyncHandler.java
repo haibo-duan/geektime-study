@@ -6,7 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.epoll.EpollChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -35,7 +34,7 @@ public class NettyAsyncHandler extends HttpOutBoundHandler {
 		bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000);
 //		bootstrap.option(EpollChannelOption.SO_REUSEPORT, true);
 		bootstrap.option(ChannelOption.SO_RCVBUF, 1024 * 1024);
-
+	
 	}
 
 	@Override
@@ -64,7 +63,7 @@ public class NettyAsyncHandler extends HttpOutBoundHandler {
 					ch.pipeline().addLast(new HttpResponseDecoder());
 					//发送的时候 通过http编码
 					ch.pipeline().addLast(new HttpRequestEncoder());
-					ch.pipeline().addLast(new GeneralHandler(inbound, ctx));
+					ch.pipeline().addLast(new GeneralHandler(inbound, ctx,responseChain));
 				}
 			};
 			bootstrap.handler(initializer);

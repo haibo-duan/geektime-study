@@ -4,7 +4,15 @@ import io.netty.handler.codec.http.FullHttpResponse;
 
 public class HeaderHttpResponseFilter implements HttpResponseFilter {
     @Override
-    public void filter(FullHttpResponse response) {
-        response.headers().set("kk", "java-1-nio");
+    public boolean filter(FullHttpResponse response,ResponseFilterChain chain) {
+        if(response.headers().contains("xjava")){
+            response.headers().remove("xjava");
+        }
+        if(!response.headers().contains("token")){
+            response.headers().remove("12345678");
+        }
+        chain.filter(response,chain);
+        return true;
     }
 }
+
