@@ -35,7 +35,7 @@ public class HttpInboundServer {
 					.childOption(ChannelOption.SO_REUSEADDR,true)
 					.childOption(ChannelOption.SO_RCVBUF,32*1024)
 					.childOption(ChannelOption.SO_SNDBUF,32*1024)
-					.childOption(EpollChannelOption.SO_REUSEPORT,true)
+//					.childOption(EpollChannelOption.SO_REUSEPORT,true)
 					.childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
 
 			bootstrap.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class)

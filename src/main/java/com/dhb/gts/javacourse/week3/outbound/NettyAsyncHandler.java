@@ -33,7 +33,7 @@ public class NettyAsyncHandler extends HttpOutBoundHandler {
 		bootstrap.group(workGroup);
 		bootstrap.channel(NioSocketChannel.class);
 		bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000);
-		bootstrap.option(EpollChannelOption.SO_REUSEPORT, true);
+//		bootstrap.option(EpollChannelOption.SO_REUSEPORT, true);
 		bootstrap.option(ChannelOption.SO_RCVBUF, 1024 * 1024);
 
 	}
