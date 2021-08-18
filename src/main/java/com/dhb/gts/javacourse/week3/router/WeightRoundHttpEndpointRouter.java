@@ -43,15 +43,18 @@ public class WeightRoundHttpEndpointRouter implements HttpEndpointRouter{
 		if(current.size()<= 0 ){
 			resetCurrent();
 		}
+		for (Map.Entry<Integer, AtomicInteger> entry : current.entrySet()) {
+			if (entry.getKey() > endpoints.size() || entry.getValue().get() <= 0) {
+				current.remove(entry);
+			}
+		}
+		
 		while (result == null) {
 			int index = random.nextInt(current.size());
 			if (current.get(index).getAndDecrement() > 0) {
 				result = endpoints.get(index);
-			}
-			for (Map.Entry<Integer, AtomicInteger> entry : current.entrySet()) {
-				if (entry.getKey() > endpoints.size() || entry.getValue().get() <= 0) {
-					current.remove(entry);
-				}
+			}else {
+				current.remove(index);
 			}
 		}
 		return result;
