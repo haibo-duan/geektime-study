@@ -5,5 +5,5 @@ import io.netty.handler.codec.http.FullHttpRequest;
 
 public interface HttpRequestFilter {
 	
-	void filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx);
+	boolean filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx,RequestFilterChain chain);
 }

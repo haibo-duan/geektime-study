@@ -4,9 +4,17 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 
 public class HeaderHttpRequestFilter implements HttpRequestFilter{
+	
 
 	@Override
-	public void filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx) {
-		
+	public boolean filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx,RequestFilterChain chain) {
+		if(!fullRequest.headers().contains("token")){
+			fullRequest.headers().set("token","12345678");
+		}
+		if(!fullRequest.headers().contains("xjava")){
+			fullRequest.headers().set("xjava","ok");
+		}
+		chain.filter(fullRequest,ctx,chain);
+		return true;
 	}
 }
