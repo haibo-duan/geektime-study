@@ -5,9 +5,11 @@ import com.dhb.gts.javacourse.week3.filter.HttpRequestFilter;
 import com.dhb.gts.javacourse.week3.filter.HttpResponseFilter;
 import com.dhb.gts.javacourse.week3.router.HttpEndpointRouter;
 import com.dhb.gts.javacourse.week3.router.RoundRibbonHttpEndpointRouter;
+import com.dhb.gts.javacourse.week3.router.WeightRoundHttpEndpointRouter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -23,8 +25,9 @@ public abstract class HttpOutBoundHandler {
 	
 
 	HttpResponseFilter filter = new HeaderHttpResponseFilter();
-	HttpEndpointRouter router = new RoundRibbonHttpEndpointRouter();
-
+//	HttpEndpointRouter router = new RoundRibbonHttpEndpointRouter();
+	HttpEndpointRouter router = new WeightRoundHttpEndpointRouter(Arrays.asList("- server01,40","- server02,60"));
+		
 	int cores = Runtime.getRuntime().availableProcessors();
 
 	public HttpOutBoundHandler(List<String> backendUrls) {
