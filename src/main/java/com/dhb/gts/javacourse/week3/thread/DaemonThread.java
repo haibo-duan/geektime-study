@@ -2,7 +2,7 @@ package com.dhb.gts.javacourse.week3.thread;
 
 public class DaemonThread {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		Runnable task = new Runnable() {
 			@Override
 			public void run() {
@@ -19,6 +19,7 @@ public class DaemonThread {
 		thread.setName("test-thread-1");
 		thread.setDaemon(true);
 		thread.start();
+		Thread.sleep(5000);
 		
 	}
 }
