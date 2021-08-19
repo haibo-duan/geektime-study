@@ -3,9 +3,7 @@ package com.dhb.gts.javacourse.week3.thread;
 public class DaemonThread {
 
 	public static void main(String[] args) throws Exception{
-		Runnable task = new Runnable() {
-			@Override
-			public void run() {
+		Runnable task = () -> {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
@@ -13,7 +11,6 @@ public class DaemonThread {
 				}
 				Thread t = Thread.currentThread();
 				System.out.println("当前线程："+t.getName());
-			}
 		};
 		Thread thread = new Thread(task);
 		thread.setName("test-thread-1");
