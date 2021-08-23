@@ -1,0 +1,44 @@
+package com.dhb.gts.javacourse.week4;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
+public class AsyncRun14 {
+	
+	private static final ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<Integer>(1);
+
+	private static int sum() {
+		return fibo(36);
+	}
+
+	private static int fibo(int a) {
+		if(a<2){
+			return 1;
+		}
+		return fibo(a-1) + fibo(a-2);
+	}
+
+	static class SumThread extends Thread{
+		
+		
+		@Override
+		public void run() {
+			try {
+				int result = sum();
+				queue.add(result);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
+	}
+
+	public static void main(String[] args) throws Exception{
+		long start = System.currentTimeMillis();
+		SumThread sumThread = new SumThread();
+		sumThread.start();
+		Integer result = queue.take();
+		
+		System.out.println("异步计算结果："+result);
+		System.out.println("计算耗时："+(System.currentTimeMillis() - start) +"  ms");
+	}
+
+}
