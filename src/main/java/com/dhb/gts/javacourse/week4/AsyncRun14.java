@@ -4,7 +4,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class AsyncRun14 {
 	
-	private static final ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<Integer>(1);
+	private static final ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(1);
 
 	private static int sum() {
 		return fibo(36);
