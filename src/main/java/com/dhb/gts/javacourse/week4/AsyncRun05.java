@@ -1,21 +1,38 @@
 package com.dhb.gts.javacourse.week4;
 
+/**
+ * 通过 wait+notify/notifyAll机制实现
+ */
 public class AsyncRun05 {
-	
+
 	private static final Object lock = new Object();
-	
+
 	private static int sum() {
 		return fibo(36);
 	}
 
 	private static int fibo(int a) {
-		if(a<2){
+		if (a < 2) {
 			return 1;
 		}
-		return fibo(a-1) + fibo(a-2);
+		return fibo(a - 1) + fibo(a - 2);
 	}
 
-	static class SumThread extends Thread{
+	public static void main(String[] args) throws Exception {
+		long start = System.currentTimeMillis();
+		SumThread sumThread = new SumThread();
+
+		sumThread.start();
+		synchronized (lock) {
+			lock.wait();
+		}
+
+		int result = sumThread.getResult();
+		System.out.println("异步计算结果：" + result);
+		System.out.println("计算耗时：" + (System.currentTimeMillis() - start) + "  ms");
+	}
+
+	static class SumThread extends Thread {
 
 		private Integer result;
 
@@ -31,19 +48,4 @@ public class AsyncRun05 {
 			}
 		}
 	}
-
-	public static void main(String[] args) throws Exception{
-		long start = System.currentTimeMillis();
-		SumThread sumThread = new SumThread();
-
-		sumThread.start();
-		synchronized (lock) {
-			lock.wait();
-		}
-		
-		int result = sumThread.getResult();
-		System.out.println("异步计算结果："+result);
-		System.out.println("计算耗时："+(System.currentTimeMillis() - start) +"  ms");
-	}
-
 }
