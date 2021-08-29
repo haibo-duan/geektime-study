@@ -8,11 +8,19 @@ public class StaticProxy implements Target{
 		this.target = target;
 	}
 
+	public void before() {
+		System.out.println("StaticProxy method execute before ...");
+	}
+
+	public void after() {
+		System.out.println("StaticProxy method execute after ...");
+	}
+	
 	@Override
 	public String execute() {
-		System.out.println("perProcess");
+		before();
 		String result = this.target.execute();
-		System.out.println("postProcess");
+		after();
 		return result;
 	}
 }
