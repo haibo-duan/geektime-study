@@ -7,10 +7,26 @@ import java.sql.ResultSet;
 public class PreparedStatementDemo {
 
 	public static void main(String[] args) {
-		selectRecordsFromDbUsersTable();
+		updateRecordsToDbUsersTable();
 	}
 	
 
+	private static void updateRecordsToDbUsersTable() {
+		Connection conn = MysqlConnection.getInstance().getCOnnection();
+		PreparedStatement ps = null;
+		String id = "12";
+		try {
+			String sql = "update users set password = ? where id=? ;";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,"12345678");
+			ps.setString(2,id);
+			int result = ps.executeUpdate();
+			System.out.println("update 语句执行影响行数："+result);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	private static void selectRecordsFromDbUsersTable() {
 		Connection conn = MysqlConnection.getInstance().getCOnnection();
