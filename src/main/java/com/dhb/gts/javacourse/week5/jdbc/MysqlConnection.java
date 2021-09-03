@@ -19,8 +19,9 @@ public class MysqlConnection {
 	
 	public  MysqlConnection() {
 		try {
+			Class.forName("com.mysql.cj.jdbc.MysqlDataSource");
 			connection = DriverManager.getConnection(URL,USERNAME,PASSWD);
-		} catch (SQLException throwables) {
+		} catch (Exception throwables) {
 			throwables.printStackTrace();
 		}
 	}
