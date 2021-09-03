@@ -8,10 +8,33 @@ import java.sql.Statement;
 public class StatementDemo {
 
 	public static void main(String[] args) throws Exception {
-		insertRecordToUsersTable();
-		selectRecordsFromDbUsersTable();
+//		insertRecordToUsersTable();
+//		selectRecordsFromDbUsersTable();
+		updateRecordsToUsersTable();
 	}
 
+	/**
+	 * update方法
+	 * @throws Exception
+	 */
+	public static void updateRecordsToUsersTable() throws Exception{
+		Connection conn = MysqlConnection.getInstance().getCOnnection();
+		Statement st = null;
+		String passwd = "dfrgeg";
+		String id = "13";
+		String sql = "update users set password = \""+passwd+"\" where id=\""+id+"\";";
+		try {
+			st = conn.createStatement();
+			st.execute(sql);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(null != st) {
+				st.close();
+			}
+		}
+	}
+	
 	/**
 	 * 插入数据
 	 * @throws Exception
