@@ -10,9 +10,28 @@ public class StatementDemo {
 	public static void main(String[] args) throws Exception {
 //		insertRecordToUsersTable();
 //		selectRecordsFromDbUsersTable();
-		updateRecordsToUsersTable();
+//		updateRecordsToUsersTable();
+		deleteRecordFromUsersTable();
 	}
 
+	public static void deleteRecordFromUsersTable() throws Exception{
+		Connection conn = MysqlConnection.getInstance().getCOnnection();
+		Statement st = null;
+		String username = "aas";
+		String sql = "delete from users where username = \""+username+"\" ;";
+		try {
+			st = conn.createStatement();
+			st.execute(sql);
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			if(null != st) {
+				st.close();
+			}
+		}
+	}
+	
 	/**
 	 * update方法
 	 * @throws Exception
