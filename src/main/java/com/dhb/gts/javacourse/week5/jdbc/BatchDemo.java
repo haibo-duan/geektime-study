@@ -4,11 +4,34 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.stream.IntStream;
 
 public class BatchDemo {
 
 	public static void main(String[] args) throws Exception{
-		statementBatch();
+//		statementBatch();
+		preparedStatementBatch();
+	}
+
+	private static void preparedStatementBatch() throws Exception{
+		Connection connection = MysqlConnection.getInstance().getCOnnection();
+		String sql1 = "insert into users(username,password) values(?,?);";
+		PreparedStatement ps = null;
+		try {
+			ps = connection.prepareStatement(sql1);
+			for(int i=0;i<10;i++) {
+				ps.setString(1,"psbatch"+i);
+				ps.setString(2,"password"+i);
+				ps.addBatch();
+			}
+			ps.executeBatch();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}finally {
+			if(null != ps){
+				ps.close();
+			}
+		}
 	}
 	
 	private static void statementBatch() throws Exception{
