@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student1" class="com.dhb.gts.javacourse.week5.springbean.v4.Student" factory-method="create"/>
+    <bean id="student2" class="com.dhb.gts.javacourse.week5.springbean.v4.Student" factory-method="create"/>
+
+
+    <bean id="klass" class="com.dhb.gts.javacourse.week5.springbean.v4.Klass"> 
+        <property name="students">
+            <array value-type="com.dhb.gts.javacourse.week5.springbean.v4.Student">
+                <ref bean="student1" />
+                <ref bean="student2" />
+            </array>
+        </property>
+    </bean>
+    
+    <bean id="school" class="com.dhb.gts.javacourse.week5.springbean.v4.School" >
+        <property name="class1" ref="klass"/>
+        <property name="student100" ref="student2"/>
+    </bean>
+    
+</beans>
