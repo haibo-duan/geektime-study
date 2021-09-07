@@ -35,6 +35,8 @@
 			implementationPackage="com.dhb.gts.javacourse.week5.mapper.impl">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table tableName="users" domainObjectName="Users"></table>
+		<table tableName="users" domainObjectName="Users">
+			<columnOverride column="createDate" jdbcType="VARCHAR" javaType="java.util.Date" typeHandler="com.dhb.gts.javacourse.week5.typehandler.MyDateTypeHandler"/>
+		</table>
 	</context>
 </generatorConfiguration>
