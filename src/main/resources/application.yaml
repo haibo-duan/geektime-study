@@ -1,0 +1,17 @@
+server:
+  port: 8084
+
+#MYBATIS
+mybatis.type-aliases-package: com.dhb.gts.javacourse.week5.entity
+mybatis.configuration.map-underscore-to-camel-case: true
+mybatis.configuration.use-generated-keys: true
+mybatis.configuration.default-fetch-size: 100
+mybatis.configuration.default-statement-timeout: 30
+# mybatis typehandler
+mybatis.type-handlers-package: com.dhb.gts.javacouse.week5.typehandler
+
+# 数据源配置
+spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
+spring.datasource.username: gts
+spring.datasource.password: mysql
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
