@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DBTool {
 
-	public DBTool() {
+	private DBTool() {
 		this.start();
 	}
 
