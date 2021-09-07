@@ -17,7 +17,8 @@ import java.util.Date;
 @MappedTypes(Date.class)
 public class MyDateTypeHandler extends BaseTypeHandler<Date> {
 
-	SSS
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
+
 	private Date convert(String source) {
 		Date result = new Date(0);
 		try {
