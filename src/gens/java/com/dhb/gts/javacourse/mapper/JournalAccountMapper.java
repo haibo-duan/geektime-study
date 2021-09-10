@@ -27,9 +27,9 @@ public interface JournalAccountMapper {
         "CREATE_TIME, IS_VALIDATE, ",
         "UPDATE_TIME)",
         "values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, ",
-        "#{type,jdbcType=tinyint}, #{sourceNo,jdbcType=INTEGER}, ",
+        "#{type,jdbcType=TINYINT}, #{sourceNo,jdbcType=INTEGER}, ",
         "#{beforeBalance,jdbcType=DECIMAL}, #{currentBalance,jdbcType=DECIMAL}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=tinyint}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=TINYINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(JournalAccount record);
@@ -41,12 +41,12 @@ public interface JournalAccountMapper {
     @Results({
         @Result(column="ID", property="id", jdbcType=JdbcType.INTEGER),
         @Result(column="CUSTOMER_ID", property="customerId", jdbcType=JdbcType.INTEGER),
-        @Result(column="TYPE", property="type", jdbcType=JdbcType.tinyint),
+        @Result(column="TYPE", property="type", jdbcType=JdbcType.TINYINT),
         @Result(column="SOURCE_NO", property="sourceNo", jdbcType=JdbcType.INTEGER),
         @Result(column="BEFORE_BALANCE", property="beforeBalance", jdbcType=JdbcType.DECIMAL),
         @Result(column="CURRENT_BALANCE", property="currentBalance", jdbcType=JdbcType.DECIMAL),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.tinyint),
+        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.TINYINT),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<JournalAccount> selectByExample(JournalAccountExample example);

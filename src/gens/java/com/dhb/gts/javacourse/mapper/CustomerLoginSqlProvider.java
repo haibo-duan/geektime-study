@@ -41,7 +41,7 @@ public class CustomerLoginSqlProvider {
         }
         
         if (record.getStates() != null) {
-            sql.VALUES("STATES", "#{states,jdbcType=tinyint}");
+            sql.VALUES("STATES", "#{states,jdbcType=TINYINT}");
         }
         
         if (record.getCreateTime() != null) {
@@ -97,7 +97,7 @@ public class CustomerLoginSqlProvider {
         }
         
         if (record.getStates() != null) {
-            sql.SET("STATES = #{record.states,jdbcType=tinyint}");
+            sql.SET("STATES = #{record.states,jdbcType=TINYINT}");
         }
         
         if (record.getCreateTime() != null) {
@@ -119,7 +119,7 @@ public class CustomerLoginSqlProvider {
         sql.SET("USER_ID = #{record.userId,jdbcType=INTEGER}");
         sql.SET("USER_NAME = #{record.userName,jdbcType=VARCHAR}");
         sql.SET("`PASSWORD` = #{record.password,jdbcType=CHAR}");
-        sql.SET("STATES = #{record.states,jdbcType=tinyint}");
+        sql.SET("STATES = #{record.states,jdbcType=TINYINT}");
         sql.SET("CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}");
         

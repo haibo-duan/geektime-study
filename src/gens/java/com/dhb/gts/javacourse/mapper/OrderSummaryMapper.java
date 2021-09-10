@@ -29,12 +29,12 @@ public interface OrderSummaryMapper {
         "EXPRESS_NO, CREATE_TIME, ",
         "IS_VALIDATE, UPDATE_TIME)",
         "values (#{orderId,jdbcType=INTEGER}, #{orderNo,jdbcType=INTEGER}, ",
-        "#{customerId,jdbcType=INTEGER}, #{paymentMethod,jdbcType=tinyint}, ",
+        "#{customerId,jdbcType=INTEGER}, #{paymentMethod,jdbcType=TINYINT}, ",
         "#{orderAmount,jdbcType=DECIMAL}, #{paymentMoney,jdbcType=DECIMAL}, ",
         "#{consigneeName,jdbcType=VARCHAR}, #{consigneeAddress,jdbcType=VARCHAR}, ",
         "#{consigneePhone,jdbcType=VARCHAR}, #{expressComp,jdbcType=VARCHAR}, ",
         "#{expressNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{isValidate,jdbcType=tinyint}, #{updateTime,jdbcType=TIMESTAMP})"
+        "#{isValidate,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(OrderSummary record);
 
@@ -46,7 +46,7 @@ public interface OrderSummaryMapper {
         @Result(column="ORDER_ID", property="orderId", jdbcType=JdbcType.INTEGER),
         @Result(column="ORDER_NO", property="orderNo", jdbcType=JdbcType.INTEGER),
         @Result(column="CUSTOMER_ID", property="customerId", jdbcType=JdbcType.INTEGER),
-        @Result(column="PAYMENT_METHOD", property="paymentMethod", jdbcType=JdbcType.tinyint),
+        @Result(column="PAYMENT_METHOD", property="paymentMethod", jdbcType=JdbcType.TINYINT),
         @Result(column="ORDER_AMOUNT", property="orderAmount", jdbcType=JdbcType.DECIMAL),
         @Result(column="PAYMENT_MONEY", property="paymentMoney", jdbcType=JdbcType.DECIMAL),
         @Result(column="CONSIGNEE_NAME", property="consigneeName", jdbcType=JdbcType.VARCHAR),
@@ -55,7 +55,7 @@ public interface OrderSummaryMapper {
         @Result(column="EXPRESS_COMP", property="expressComp", jdbcType=JdbcType.VARCHAR),
         @Result(column="EXPRESS_NO", property="expressNo", jdbcType=JdbcType.VARCHAR),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.tinyint),
+        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.TINYINT),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<OrderSummary> selectByExample(OrderSummaryExample example);

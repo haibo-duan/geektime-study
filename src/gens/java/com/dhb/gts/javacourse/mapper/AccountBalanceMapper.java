@@ -26,7 +26,7 @@ public interface AccountBalanceMapper {
         "IS_VALIDATE, UPDATE_TIME)",
         "values (#{id,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, ",
         "#{balance,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{isValidate,jdbcType=tinyint}, #{updateTime,jdbcType=TIMESTAMP})"
+        "#{isValidate,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(AccountBalance record);
 
@@ -39,7 +39,7 @@ public interface AccountBalanceMapper {
         @Result(column="CUSTOMER_ID", property="customerId", jdbcType=JdbcType.INTEGER),
         @Result(column="BALANCE", property="balance", jdbcType=JdbcType.DECIMAL),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.tinyint),
+        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.TINYINT),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<AccountBalance> selectByExample(AccountBalanceExample example);

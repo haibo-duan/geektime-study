@@ -28,10 +28,10 @@ public interface CustomerInfoMapper {
         "BIRTHDAY, IS_VALIDATE, ",
         "UPDATE_TIME)",
         "values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, ",
-        "#{name,jdbcType=VARCHAR}, #{identityCardType,jdbcType=tinyint}, ",
+        "#{name,jdbcType=VARCHAR}, #{identityCardType,jdbcType=TINYINT}, ",
         "#{identityCardNo,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, ",
         "#{email,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, ",
-        "#{birthday,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=tinyint}, ",
+        "#{birthday,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=TINYINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(CustomerInfo record);
@@ -44,14 +44,14 @@ public interface CustomerInfoMapper {
         @Result(column="ID", property="id", jdbcType=JdbcType.INTEGER),
         @Result(column="USER_ID", property="userId", jdbcType=JdbcType.INTEGER),
         @Result(column="NAME", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="IDENTITY_CARD_TYPE", property="identityCardType", jdbcType=JdbcType.tinyint),
+        @Result(column="IDENTITY_CARD_TYPE", property="identityCardType", jdbcType=JdbcType.TINYINT),
         @Result(column="IDENTITY_CARD_NO", property="identityCardNo", jdbcType=JdbcType.VARCHAR),
         @Result(column="MOBILE", property="mobile", jdbcType=JdbcType.VARCHAR),
         @Result(column="EMAIL", property="email", jdbcType=JdbcType.VARCHAR),
         @Result(column="GENDER", property="gender", jdbcType=JdbcType.CHAR),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="BIRTHDAY", property="birthday", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.tinyint),
+        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.TINYINT),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<CustomerInfo> selectByExample(CustomerInfoExample example);

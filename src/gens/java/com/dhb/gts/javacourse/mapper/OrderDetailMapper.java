@@ -31,7 +31,7 @@ public interface OrderDetailMapper {
         "#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, ",
         "#{numbers,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, ",
         "#{averageCost,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=tinyint}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=TINYINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(OrderDetail record);
@@ -50,7 +50,7 @@ public interface OrderDetailMapper {
         @Result(column="AVERAGE_COST", property="averageCost", jdbcType=JdbcType.DECIMAL),
         @Result(column="TOTAL", property="total", jdbcType=JdbcType.DECIMAL),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.tinyint),
+        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.TINYINT),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<OrderDetail> selectByExample(OrderDetailExample example);

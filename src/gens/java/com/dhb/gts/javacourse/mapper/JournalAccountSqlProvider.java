@@ -37,7 +37,7 @@ public class JournalAccountSqlProvider {
         }
         
         if (record.getType() != null) {
-            sql.VALUES("`TYPE`", "#{type,jdbcType=tinyint}");
+            sql.VALUES("`TYPE`", "#{type,jdbcType=TINYINT}");
         }
         
         if (record.getSourceNo() != null) {
@@ -57,7 +57,7 @@ public class JournalAccountSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=tinyint}");
+            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -108,7 +108,7 @@ public class JournalAccountSqlProvider {
         }
         
         if (record.getType() != null) {
-            sql.SET("`TYPE` = #{record.type,jdbcType=tinyint}");
+            sql.SET("`TYPE` = #{record.type,jdbcType=TINYINT}");
         }
         
         if (record.getSourceNo() != null) {
@@ -128,7 +128,7 @@ public class JournalAccountSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -145,12 +145,12 @@ public class JournalAccountSqlProvider {
         
         sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         sql.SET("CUSTOMER_ID = #{record.customerId,jdbcType=INTEGER}");
-        sql.SET("`TYPE` = #{record.type,jdbcType=tinyint}");
+        sql.SET("`TYPE` = #{record.type,jdbcType=TINYINT}");
         sql.SET("SOURCE_NO = #{record.sourceNo,jdbcType=INTEGER}");
         sql.SET("BEFORE_BALANCE = #{record.beforeBalance,jdbcType=DECIMAL}");
         sql.SET("CURRENT_BALANCE = #{record.currentBalance,jdbcType=DECIMAL}");
         sql.SET("CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         sql.SET("UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         JournalAccountExample example = (JournalAccountExample) parameter.get("example");

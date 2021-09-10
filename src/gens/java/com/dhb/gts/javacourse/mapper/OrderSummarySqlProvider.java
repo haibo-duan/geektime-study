@@ -41,7 +41,7 @@ public class OrderSummarySqlProvider {
         }
         
         if (record.getPaymentMethod() != null) {
-            sql.VALUES("PAYMENT_METHOD", "#{paymentMethod,jdbcType=tinyint}");
+            sql.VALUES("PAYMENT_METHOD", "#{paymentMethod,jdbcType=TINYINT}");
         }
         
         if (record.getOrderAmount() != null) {
@@ -77,7 +77,7 @@ public class OrderSummarySqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=tinyint}");
+            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -137,7 +137,7 @@ public class OrderSummarySqlProvider {
         }
         
         if (record.getPaymentMethod() != null) {
-            sql.SET("PAYMENT_METHOD = #{record.paymentMethod,jdbcType=tinyint}");
+            sql.SET("PAYMENT_METHOD = #{record.paymentMethod,jdbcType=TINYINT}");
         }
         
         if (record.getOrderAmount() != null) {
@@ -173,7 +173,7 @@ public class OrderSummarySqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -191,7 +191,7 @@ public class OrderSummarySqlProvider {
         sql.SET("ORDER_ID = #{record.orderId,jdbcType=INTEGER}");
         sql.SET("ORDER_NO = #{record.orderNo,jdbcType=INTEGER}");
         sql.SET("CUSTOMER_ID = #{record.customerId,jdbcType=INTEGER}");
-        sql.SET("PAYMENT_METHOD = #{record.paymentMethod,jdbcType=tinyint}");
+        sql.SET("PAYMENT_METHOD = #{record.paymentMethod,jdbcType=TINYINT}");
         sql.SET("ORDER_AMOUNT = #{record.orderAmount,jdbcType=DECIMAL}");
         sql.SET("PAYMENT_MONEY = #{record.paymentMoney,jdbcType=DECIMAL}");
         sql.SET("CONSIGNEE_NAME = #{record.consigneeName,jdbcType=VARCHAR}");
@@ -200,7 +200,7 @@ public class OrderSummarySqlProvider {
         sql.SET("EXPRESS_COMP = #{record.expressComp,jdbcType=VARCHAR}");
         sql.SET("EXPRESS_NO = #{record.expressNo,jdbcType=VARCHAR}");
         sql.SET("CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         sql.SET("UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         OrderSummaryExample example = (OrderSummaryExample) parameter.get("example");

@@ -39,28 +39,28 @@
 			<columnOverride column="createDate" jdbcType="VARCHAR" javaType="java.util.Date" typeHandler="com.dhb.gts.javacourse.week5.typehandler.MyDateTypeHandler"/>
 		</table>-->
 		<table tableName="T_ACCOUNT_BALANCE" domainObjectName="AccountBalance">
-			<columnOverride column="IS_VALIDATE" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="IS_VALIDATE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 		<table tableName="T_CUSTOMER_INFO" domainObjectName="CustomerInfo">
-			<columnOverride column="IDENTITY_CARD_TYPE" jdbcType="tinyint" javaType="java.lang.Integer"/>
-			<columnOverride column="IS_VALIDATE" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="IDENTITY_CARD_TYPE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
+			<columnOverride column="IS_VALIDATE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 		<table tableName="T_CUSTOMER_LOGIN" domainObjectName="CustomerLogin">
-			<columnOverride column="STATES" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="STATES" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 		<table tableName="T_JOURNAL_ACCOUNT" domainObjectName="JournalAccount">
-			<columnOverride column="TYPE" jdbcType="tinyint" javaType="java.lang.Integer"/>
-			<columnOverride column="IS_VALIDATE" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="TYPE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
+			<columnOverride column="IS_VALIDATE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 		<table tableName="T_ORDER_DETAIL" domainObjectName="OrderDetail">
-			<columnOverride column="IS_VALIDATE" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="IS_VALIDATE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 		<table tableName="T_ORDER_SUMMARY" domainObjectName="OrderSummary">
-			<columnOverride column="PAYMENT_METHOD" jdbcType="tinyint" javaType="java.lang.Integer"/>
-			<columnOverride column="IS_VALIDATE" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="PAYMENT_METHOD" jdbcType="TINYINT" javaType="java.lang.Integer"/>
+			<columnOverride column="IS_VALIDATE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 		<table tableName="T_PRODUCT_INFO" domainObjectName="ProductInfo">
-			<columnOverride column="IS_VALIDATE" jdbcType="tinyint" javaType="java.lang.Integer"/>
+			<columnOverride column="IS_VALIDATE" jdbcType="TINYINT" javaType="java.lang.Integer"/>
 		</table>
 	</context>
 </generatorConfiguration>

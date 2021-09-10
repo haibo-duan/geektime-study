@@ -25,7 +25,7 @@ public interface CustomerLoginMapper {
         "`PASSWORD`, STATES, CREATE_TIME, ",
         "UPDATE_TIME)",
         "values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, ",
-        "#{password,jdbcType=CHAR}, #{states,jdbcType=tinyint}, #{createTime,jdbcType=TIMESTAMP}, ",
+        "#{password,jdbcType=CHAR}, #{states,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(CustomerLogin record);
@@ -38,7 +38,7 @@ public interface CustomerLoginMapper {
         @Result(column="USER_ID", property="userId", jdbcType=JdbcType.INTEGER),
         @Result(column="USER_NAME", property="userName", jdbcType=JdbcType.VARCHAR),
         @Result(column="PASSWORD", property="password", jdbcType=JdbcType.CHAR),
-        @Result(column="STATES", property="states", jdbcType=JdbcType.tinyint),
+        @Result(column="STATES", property="states", jdbcType=JdbcType.TINYINT),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })

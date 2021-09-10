@@ -31,7 +31,7 @@ public interface ProductInfoMapper {
         "#{productName,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, ",
         "#{price,jdbcType=DECIMAL}, #{acerageCost,jdbcType=DECIMAL}, ",
         "#{status,jdbcType=TINYINT}, #{productionDate,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=tinyint}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{isValidate,jdbcType=TINYINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP})"
     })
     int insert(ProductInfo record);
@@ -50,7 +50,7 @@ public interface ProductInfoMapper {
         @Result(column="STATUS", property="status", jdbcType=JdbcType.TINYINT),
         @Result(column="PRODUCTION_DATE", property="productionDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="CREATE_TIME", property="createTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.tinyint),
+        @Result(column="IS_VALIDATE", property="isValidate", jdbcType=JdbcType.TINYINT),
         @Result(column="UPDATE_TIME", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<ProductInfo> selectByExample(ProductInfoExample example);

@@ -45,7 +45,7 @@ public class AccountBalanceSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=tinyint}");
+            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -101,7 +101,7 @@ public class AccountBalanceSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -120,7 +120,7 @@ public class AccountBalanceSqlProvider {
         sql.SET("CUSTOMER_ID = #{record.customerId,jdbcType=INTEGER}");
         sql.SET("BALANCE = #{record.balance,jdbcType=DECIMAL}");
         sql.SET("CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         sql.SET("UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         AccountBalanceExample example = (AccountBalanceExample) parameter.get("example");

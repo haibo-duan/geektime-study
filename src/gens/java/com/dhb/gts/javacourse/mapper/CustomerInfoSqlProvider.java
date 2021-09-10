@@ -41,7 +41,7 @@ public class CustomerInfoSqlProvider {
         }
         
         if (record.getIdentityCardType() != null) {
-            sql.VALUES("IDENTITY_CARD_TYPE", "#{identityCardType,jdbcType=tinyint}");
+            sql.VALUES("IDENTITY_CARD_TYPE", "#{identityCardType,jdbcType=TINYINT}");
         }
         
         if (record.getIdentityCardNo() != null) {
@@ -69,7 +69,7 @@ public class CustomerInfoSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=tinyint}");
+            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -127,7 +127,7 @@ public class CustomerInfoSqlProvider {
         }
         
         if (record.getIdentityCardType() != null) {
-            sql.SET("IDENTITY_CARD_TYPE = #{record.identityCardType,jdbcType=tinyint}");
+            sql.SET("IDENTITY_CARD_TYPE = #{record.identityCardType,jdbcType=TINYINT}");
         }
         
         if (record.getIdentityCardNo() != null) {
@@ -155,7 +155,7 @@ public class CustomerInfoSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -173,14 +173,14 @@ public class CustomerInfoSqlProvider {
         sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         sql.SET("USER_ID = #{record.userId,jdbcType=INTEGER}");
         sql.SET("`NAME` = #{record.name,jdbcType=VARCHAR}");
-        sql.SET("IDENTITY_CARD_TYPE = #{record.identityCardType,jdbcType=tinyint}");
+        sql.SET("IDENTITY_CARD_TYPE = #{record.identityCardType,jdbcType=TINYINT}");
         sql.SET("IDENTITY_CARD_NO = #{record.identityCardNo,jdbcType=VARCHAR}");
         sql.SET("MOBILE = #{record.mobile,jdbcType=VARCHAR}");
         sql.SET("EMAIL = #{record.email,jdbcType=VARCHAR}");
         sql.SET("GENDER = #{record.gender,jdbcType=CHAR}");
         sql.SET("CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("BIRTHDAY = #{record.birthday,jdbcType=TIMESTAMP}");
-        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         sql.SET("UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         CustomerInfoExample example = (CustomerInfoExample) parameter.get("example");

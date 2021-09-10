@@ -65,7 +65,7 @@ public class ProductInfoSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=tinyint}");
+            sql.VALUES("IS_VALIDATE", "#{isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -146,7 +146,7 @@ public class ProductInfoSqlProvider {
         }
         
         if (record.getIsValidate() != null) {
-            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+            sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -170,7 +170,7 @@ public class ProductInfoSqlProvider {
         sql.SET("`STATUS` = #{record.status,jdbcType=TINYINT}");
         sql.SET("PRODUCTION_DATE = #{record.productionDate,jdbcType=TIMESTAMP}");
         sql.SET("CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=tinyint}");
+        sql.SET("IS_VALIDATE = #{record.isValidate,jdbcType=TINYINT}");
         sql.SET("UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         ProductInfoExample example = (ProductInfoExample) parameter.get("example");
