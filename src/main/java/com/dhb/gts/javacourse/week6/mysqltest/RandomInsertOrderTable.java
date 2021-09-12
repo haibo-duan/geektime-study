@@ -7,6 +7,7 @@ import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
 import com.dhb.gts.javacourse.fluent.mapper.OrderDetailMapper;
 import com.dhb.gts.javacourse.fluent.mapper.OrderSummaryMapper;
 import com.dhb.gts.javacourse.fluent.wrapper.OrderSummaryQuery;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,7 @@ public class RandomInsertOrderTable {
 
 	private void randomBatchInsertOder(int totalSize, int batchSize) {
 		int maxOrderNo = getMaxOderNo();
+		List<Long> costs = Lists.newArrayList();
 		log.info("maxOrderNo is [" + maxOrderNo + "]!");
 		log.info("数据批流插入开始...");
 		long start = System.currentTimeMillis();
@@ -63,13 +65,20 @@ public class RandomInsertOrderTable {
 		}
 		for (int i = 0; i <= count; i++) {
 			log.info("批次[" + i + "]处理开始...");
+			long begin = System.currentTimeMillis();
 			List<OrderSummaryEntity> summarys = buildBatchOrderSummary(orderId, batchSize);
 			List<OrderDetailEntity> detials = buildBatcOrderDetail(orderId, batchSize);
 			batchInsert(summarys, detials);
 			orderId += batchSize;
-			log.info("批次[" + i + "]处理完毕...");
+			long cost = System.currentTimeMillis()-begin;
+			costs.add(cost);
+			log.info("批次[" + i + "]处理完毕,耗时："+cost+" ms");
 		}
-		log.info("批量插入数据 totalSize [" + totalSize + "]... 共耗时[" + (System.currentTimeMillis() - start) + "]");
+		long max = costs.stream().mapToLong(Long::longValue).max().getAsLong();
+		long min = costs.stream().mapToLong(Long::longValue).min().getAsLong();
+		double average = costs.stream().mapToLong(Long::longValue).average().getAsDouble();
+		log.info("总计插入批次共"+costs.size()+"次，其中，最大耗时:"+max+"ms 最小耗时："+min+"ms 平均耗时:"+average+"ms");
+		log.info("批量插入数据 totalSize [" + totalSize + "]... 共耗时[" + (System.currentTimeMillis() - start) + "] ms");
 	}
 
 	private void batchInsert(List<OrderSummaryEntity> summarys, List<OrderDetailEntity> detials) {
