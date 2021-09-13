@@ -24,13 +24,6 @@ public class QueryOrderTable {
 	@Autowired
 	OrderSummaryDao orderSummaryDao;
 
-	@Autowired
-	OrderSummaryMapper orderSummaryMapper;
-
-	@Autowired
-	OrderDetailMapper orderDetailMapper;
-
-
 	@RequestMapping("/queryByKey")
 	public String queryByKey(String key) {
 		Stopwatch stopwatch = Stopwatch.createStarted();
@@ -51,7 +44,7 @@ public class QueryOrderTable {
 		} else if (Strings.isNotEmpty(expressNo)) {
 			map.put(OrderSummaryMapping.expressNo.column, expressNo);
 		}
-		List<OrderSummaryEntity> entitys = orderSummaryMapper.listByMap(map);
+		List<OrderSummaryEntity> entitys = orderSummaryDao.selectByMap(map);
 		stopwatch.stop();
 		System.out.println("不通过key查询，全表扫描耗时：" + stopwatch);
 		return JSON.toJSONString(entitys);
