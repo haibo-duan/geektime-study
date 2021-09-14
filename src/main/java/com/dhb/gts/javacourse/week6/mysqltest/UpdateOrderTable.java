@@ -57,7 +57,7 @@ public class UpdateOrderTable {
 				.setPaymentMethod(2);
 		orderSummaryDao.updateBy(update,where);
 		stopwatch.stop();
-		System.out.println("通过key修改 key is["+where.getOrderId()+"] cost is ：" + stopwatch);
+		System.out.println("通过key修改 orderNo is["+where.getOrderNo()+"] cost is ：" + stopwatch);
 		return "success";
 	}
 	
