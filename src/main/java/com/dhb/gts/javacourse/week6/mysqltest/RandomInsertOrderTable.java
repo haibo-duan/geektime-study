@@ -4,9 +4,7 @@ import com.dhb.gts.javacourse.fluent.dao.intf.OrderDetailDao;
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;
 import com.dhb.gts.javacourse.fluent.entity.OrderDetailEntity;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
-import com.dhb.gts.javacourse.fluent.mapper.OrderDetailMapper;
-import com.dhb.gts.javacourse.fluent.mapper.OrderSummaryMapper;
-import com.dhb.gts.javacourse.fluent.wrapper.OrderSummaryQuery;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @RestController
@@ -28,12 +25,6 @@ public class RandomInsertOrderTable {
 
 	@Autowired
 	OrderDetailDao orderDetailDao;
-
-	@Autowired
-	OrderSummaryMapper orderSummaryMapper;
-
-	@Autowired
-	OrderDetailMapper orderDetailMapper;
 
 
 	@RequestMapping("/randomInsertOrderTable")
@@ -49,6 +40,15 @@ public class RandomInsertOrderTable {
 			e.printStackTrace();
 		}
 		randomBatchInsertOder(totalNumbers, batchSize);
+		return "success";
+	}
+
+	@RequestMapping("/randomInsertOneOrder")
+	public String randomInsertOneOrder() {
+		Stopwatch stopwatch = Stopwatch.createStarted();
+		int orderNo = getMaxOderNo();
+		insertOrder(orderNo+1);
+		log.info("randomInsertOneOrder cost time :"+ stopwatch.stop());
 		return "success";
 	}
 
@@ -70,31 +70,24 @@ public class RandomInsertOrderTable {
 			List<OrderDetailEntity> detials = buildBatcOrderDetail(orderId, batchSize);
 			batchInsert(summarys, detials);
 			orderId += batchSize;
-			long cost = System.currentTimeMillis()-begin;
+			long cost = System.currentTimeMillis() - begin;
 			costs.add(cost);
-			log.info("批次[" + i + "]处理完毕,耗时："+cost+" ms");
+			log.info("批次[" + i + "]处理完毕,耗时：" + cost + " ms");
 		}
 		long max = costs.stream().mapToLong(Long::longValue).max().getAsLong();
 		long min = costs.stream().mapToLong(Long::longValue).min().getAsLong();
 		double average = costs.stream().mapToLong(Long::longValue).average().getAsDouble();
-		log.info("总计插入批次共"+costs.size()+"次，其中，最大耗时:"+max+"ms 最小耗时："+min+"ms 平均耗时:"+average+"ms");
+		log.info("总计插入批次共" + costs.size() + "次，其中，最大耗时:" + max + "ms 最小耗时：" + min + "ms 平均耗时:" + average + "ms");
 		log.info("批量插入数据 totalSize [" + totalSize + "]... 共耗时[" + (System.currentTimeMillis() - start) + "] ms");
 	}
 
 	private void batchInsert(List<OrderSummaryEntity> summarys, List<OrderDetailEntity> detials) {
-		orderSummaryMapper.insertBatch(summarys);
-		orderDetailMapper.insertBatch(detials);
+		orderSummaryDao.save(summarys);
+		orderDetailDao.save(detials);
 	}
 
 	private int getMaxOderNo() {
-		OrderSummaryQuery query = new OrderSummaryQuery()
-				.select.max.orderNo("maxOrderNo")
-				.end();
-		List<Map<String, Object>> result = orderSummaryMapper.listMaps(query);
-		if (result.isEmpty() || null == result.get(0) || null == result.get(0).get("maxOrderNo")) {
-			return 0;
-		}
-		return (Integer) result.get(0).get("maxOrderNo");
+		return orderSummaryDao.selectMaxOrderNo();
 	}
 
 	private void insertOrder(int orderId) {
@@ -107,7 +100,7 @@ public class RandomInsertOrderTable {
 				.setTotal(new BigDecimal(28))
 				.setAverageCost(new BigDecimal(12))
 				.setIsValidate(1);
-		orderDetailMapper.insert(orderDetailEntity1);
+		orderDetailDao.save(orderDetailEntity1);
 		OrderDetailEntity orderDetailEntity2 = new OrderDetailEntity()
 				.setOrderId(orderId)
 				.setProductId(10003)
@@ -117,7 +110,7 @@ public class RandomInsertOrderTable {
 				.setTotal(new BigDecimal(28))
 				.setAverageCost(new BigDecimal(6))
 				.setIsValidate(1);
-		orderDetailMapper.insert(orderDetailEntity2);
+		orderDetailDao.save(orderDetailEntity2);
 	}
 
 	private List<OrderSummaryEntity> buildBatchOrderSummary(int orderId, int batchNumber) {
