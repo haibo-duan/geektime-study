@@ -1,6 +1,5 @@
 package com.dhb.gts.javacourse.week6.mysqltest;
 
-import com.alibaba.fastjson.JSON;
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
 import com.google.common.base.Stopwatch;
@@ -22,20 +21,22 @@ public class UpdateOrderTable {
 	public String randomModifyByKey() {
 		Stopwatch stopwatch = Stopwatch.createStarted();
 		Random random = new Random(System.currentTimeMillis());
-		int maxOrderId = orderSummaryDao.selectMaxOrderId();
-		int orderId = maxOrderId;
-		if(maxOrderId > 10000) {
-			orderId = random.nextInt(maxOrderId-10000)+5000;
-		}else {
-			orderId = random.nextInt(maxOrderId);
-		}
-		OrderSummaryEntity entity = new OrderSummaryEntity()
-				.setOrderId(orderId)
-						.setConsigneeAddress("北京市丰台区方庄南路19号")
-								.setPaymentMethod(2);
-		orderSummaryDao.saveOrUpdate(entity);
+//		int maxOrderId = orderSummaryDao.selectMaxOrderId();
+//		int orderId = maxOrderId;
+//		if(maxOrderId > 50000) {
+//			orderId = random.nextInt(maxOrderId-50000)+50000;
+//		}else {
+//			orderId = random.nextInt(maxOrderId);
+//		}
+		int orderId = random.nextInt(2100000-50000)+50000;
+		OrderSummaryEntity where = new OrderSummaryEntity()
+				.setOrderId(orderId);
+		OrderSummaryEntity 	update = new OrderSummaryEntity()
+				.setConsigneeAddress("北京市丰台区方庄南路19号")
+				.setPaymentMethod(2);
+		orderSummaryDao.updateBy(update,where);
 		stopwatch.stop();
-		System.out.println("通过key修改 key is["+entity.getOrderId()+"] cost is ：" + stopwatch);
+		System.out.println("通过key修改 key is["+where.getOrderId()+"] cost is ：" + stopwatch);
 		return "success";
 	}
 
@@ -43,13 +44,14 @@ public class UpdateOrderTable {
 	public String randomOneModifyByNo() {
 		Stopwatch stopwatch = Stopwatch.createStarted();
 		Random random = new Random(System.currentTimeMillis());
-		int maxOrderNo = orderSummaryDao.selectMaxOrderNo();
-		int orderNo = maxOrderNo;
-		if(maxOrderNo > 10000) {
-			orderNo = random.nextInt(maxOrderNo-10000)+5000;
-		}else {
-			orderNo = random.nextInt(maxOrderNo);
-		}
+//		int maxOrderNo = orderSummaryDao.selectMaxOrderNo();
+//		int orderNo = maxOrderNo;
+//		if(maxOrderNo > 10000) {
+//			orderNo = random.nextInt(maxOrderNo-10000)+5000;
+//		}else {
+//			orderNo = random.nextInt(maxOrderNo);
+//		}
+		int orderNo = random.nextInt(1998425-50000)+50000;
 		OrderSummaryEntity where = new OrderSummaryEntity()
 				.setOrderNo(orderNo);
 		OrderSummaryEntity 	update = new OrderSummaryEntity()
