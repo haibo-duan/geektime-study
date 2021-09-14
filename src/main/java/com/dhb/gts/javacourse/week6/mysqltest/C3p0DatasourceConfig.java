@@ -11,9 +11,9 @@ import javax.sql.DataSource;
 @Configuration
 public class C3p0DatasourceConfig {
 
-	@Bean(name = "dataSource")
-	@Qualifier(value = "dataSource")
-	@ConfigurationProperties(prefix = "spring.datasource")
+//	@Bean(name = "dataSource")
+//	@Qualifier(value = "dataSource")
+//	@ConfigurationProperties(prefix = "spring.datasource")
 	public DataSource dataSource() {
 		       return DataSourceBuilder.create().type(com.mchange.v2.c3p0.ComboPooledDataSource.class).build();
 	}
