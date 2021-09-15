@@ -20,14 +20,14 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `T_ORDER_DETAIL`;
 CREATE TABLE `T_ORDER_DETAIL` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键-自增列',
-  `ORDER_ID` int(11) NOT NULL COMMENT '订单汇总表ID',
-  `PRODUCT_ID` int(11) NOT NULL COMMENT '产品编号',
+  `ID` int NOT NULL AUTO_INCREMENT COMMENT '主键-自增列',
+  `ORDER_ID` int NOT NULL COMMENT '订单汇总表ID',
+  `PRODUCT_ID` int NOT NULL COMMENT '产品编号',
   `PRODUCT_NAME` varchar(50) NOT NULL COMMENT '产品名称',
-  `NUMBERS` int(11) NOT NULL COMMENT '数量',
-  `PRICE` decimal(8,2) NOT NULL COMMENT '产品单价',
-  `AVERAGE_COST` decimal(8,2) NOT NULL COMMENT '核算平均成本价格',
-  `TOTAL` decimal(8,2) NOT NULL COMMENT '产品总金额',
+  `NUMBERS` int NOT NULL COMMENT '数量',
+  `PRICE` int NOT NULL COMMENT '产品单价 单位 分 此处为int,比bigint节约4个字节',
+  `AVERAGE_COST` int NOT NULL COMMENT '核算平均成本价格 单位 分 此处为int,比bigint节约4个字节',
+  `TOTAL` int NOT NULL COMMENT '产品总金额 单位 分 此处为int,比bigint节约4个字节',
   `CREATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `IS_VALIDATE` tinyint(4) NOT NULL DEFAULT '1' COMMENT '数据是否有效标识：1有效数据，2 无效数据',
   `UPDATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
