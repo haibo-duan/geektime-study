@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.week7.batchinsert;
+package com.dhb.gts.javacourse.week7.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
