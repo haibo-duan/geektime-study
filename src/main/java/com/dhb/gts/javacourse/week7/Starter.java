@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.week7.batchinsert;
+package com.dhb.gts.javacourse.week7;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
