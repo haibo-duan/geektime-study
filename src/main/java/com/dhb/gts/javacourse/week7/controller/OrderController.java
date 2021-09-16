@@ -49,7 +49,7 @@ public class OrderController {
 		Integer orde_id = Integer.parseInt(key);
 		OrderSummaryEntity entity = orderService.queryOrderById(orde_id);
 		stopwatch.stop();
-		System.out.println("通过key查询，走索引耗时：" + stopwatch);
+		log.info("通过key查询，走索引耗时：" + stopwatch);
 		return JSON.toJSONString(entity);
 	}
 
@@ -58,7 +58,13 @@ public class OrderController {
 		Stopwatch stopwatch = Stopwatch.createStarted();
 		List<OrderSummaryEntity> entitys =  orderService.queryOrderByKey(orderNo,expressNo);
 		stopwatch.stop();
-		System.out.println("不通过key查询，全表扫描耗时：" + stopwatch);
+		log.info("不通过key查询，全表扫描耗时：" + stopwatch);
 		return JSON.toJSONString(entitys);
+	}
+	@RequestMapping("/asyncInsertRandomOrder")
+	public String asyncInsertRandomOrder() {
+		orderService.asyncInsertRandomOrder();
+		log.info("调用异步方法插入一个订单！");
+		return "success";
 	}
 }

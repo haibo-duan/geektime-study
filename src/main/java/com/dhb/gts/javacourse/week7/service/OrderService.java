@@ -5,10 +5,12 @@ import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;
 import com.dhb.gts.javacourse.fluent.entity.OrderDetailEntity;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
 import com.dhb.gts.javacourse.fluent.helper.OrderSummaryMapping;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,6 +29,15 @@ public class OrderService {
 
 	@Autowired
 	OrderDetailDao orderDetailDao;
+	
+	@Async
+	public void asyncInsertRandomOrder(){
+		Stopwatch stopwatch = Stopwatch.createStarted();
+		log.info("开始通过线程持进行异步插入！");
+		int orderNo = getMaxOderNo();
+		insertOrder(orderNo+1);
+		log.info("通过线程池插入完成，共耗时:"+stopwatch.stop());
+	}
 	
 	public OrderSummaryEntity queryOrderById(int order_id){
 		return orderSummaryDao.selectById(order_id);
