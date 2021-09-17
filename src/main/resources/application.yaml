@@ -53,3 +53,14 @@ spring.datasource.testOnReturn: false
 spring.datasource.poolPreparedStatements: true
 spring.datasource.maxPoolPreparedStatementPerConnectionSize: 20
 spring.datasource.filters: stat
+
+#线程池配置
+async.executor.thread.core_pool_size: 5
+# 最大线程数
+async.executor.thread.max_pool_size: 20
+# 任务队列大小
+async.executor.thread.queue_capacity: 100
+# 线程池中线程的名称前缀
+async.executor.thread.name.prefix: async-service-
+# 缓冲队列中线程的空闲时间
+async.executor.thread.keep_alive_seconds: 100
