@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,6 +40,13 @@ public class OrderService {
 		insertOrder(orderNo+1);
 		log.info("通过线程池插入完成，共耗时:"+stopwatch.stop());
 	}
+	
+	@Async
+	public ListenableFuture<OrderSummaryEntity> asyncQueryOrderById(int order_id){
+		OrderSummaryEntity entity = orderSummaryDao.selectById(order_id);
+		return new AsyncResult<>(entity);
+	}
+	
 	
 	public OrderSummaryEntity queryOrderById(int order_id){
 		return orderSummaryDao.selectById(order_id);

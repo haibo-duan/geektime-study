@@ -61,10 +61,26 @@ public class OrderController {
 		log.info("不通过key查询，全表扫描耗时：" + stopwatch);
 		return JSON.toJSONString(entitys);
 	}
+	
 	@RequestMapping("/asyncInsertRandomOrder")
 	public String asyncInsertRandomOrder() {
 		orderService.asyncInsertRandomOrder();
 		log.info("调用异步方法插入一个订单！");
 		return "success";
+	}
+	
+	@RequestMapping("/asyncQueryByKey")
+	public String asyncQueryByKey(String key) {
+		Stopwatch stopwatch = Stopwatch.createStarted();
+		Integer orde_id = Integer.parseInt(key);
+		OrderSummaryEntity entity = null;
+		try {
+			entity = orderService.asyncQueryOrderById(orde_id).get();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		stopwatch.stop();
+		log.info("通过key查询，走索引耗时：" + stopwatch);
+		return JSON.toJSONString(entity);
 	}
 }
