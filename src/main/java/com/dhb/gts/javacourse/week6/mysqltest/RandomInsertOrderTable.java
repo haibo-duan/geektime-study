@@ -95,20 +95,20 @@ public class RandomInsertOrderTable {
 				.setOrderId(orderId)
 				.setProductId(10002)
 				.setProductName("手机钢化膜")
-				.setPrice(new BigDecimal(14))
+				.setPrice(1400)
 				.setNumbers(2)
-				.setTotal(new BigDecimal(28))
-				.setAverageCost(new BigDecimal(12))
+				.setTotal(2800)
+				.setAverageCost(1200)
 				.setIsValidate(1);
 		orderDetailDao.save(orderDetailEntity1);
 		OrderDetailEntity orderDetailEntity2 = new OrderDetailEntity()
 				.setOrderId(orderId)
 				.setProductId(10003)
 				.setProductName("手机壳")
-				.setPrice(new BigDecimal(7))
+				.setPrice(700)
 				.setNumbers(4)
-				.setTotal(new BigDecimal(28))
-				.setAverageCost(new BigDecimal(6))
+				.setTotal(2800)
+				.setAverageCost(600)
 				.setIsValidate(1);
 		orderDetailDao.save(orderDetailEntity2);
 	}
@@ -144,8 +144,8 @@ public class RandomInsertOrderTable {
 				.setExpressNo("1001" + expressNo)
 				.setExpressComp("顺丰")
 				.setPaymentMethod(1)
-				.setPaymentMoney(new BigDecimal(56.00))
-				.setOrderAmount(new BigDecimal(56.00))
+				.setPaymentMoney(5600)
+				.setOrderAmount(5600)
 				.setIsValidate(1);
 		return orderSummaryEntity;
 	}
@@ -155,10 +155,10 @@ public class RandomInsertOrderTable {
 				.setOrderId(orderId)
 				.setProductId(10002)
 				.setProductName("手机钢化膜")
-				.setPrice(new BigDecimal(14))
+				.setPrice(1400)
 				.setNumbers(2)
-				.setTotal(new BigDecimal(28))
-				.setAverageCost(new BigDecimal(12))
+				.setTotal(2800)
+				.setAverageCost(1200)
 				.setIsValidate(1);
 		return orderDetailEntity1;
 	}
@@ -168,10 +168,10 @@ public class RandomInsertOrderTable {
 				.setOrderId(orderId)
 				.setProductId(10003)
 				.setProductName("手机壳")
-				.setPrice(new BigDecimal(7))
+				.setPrice(700)
 				.setNumbers(4)
-				.setTotal(new BigDecimal(28))
-				.setAverageCost(new BigDecimal(6))
+				.setTotal(2800)
+				.setAverageCost(600)
 				.setIsValidate(1);
 		return orderDetailEntity2;
 	}
