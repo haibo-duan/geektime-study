@@ -12,7 +12,7 @@ import java.util.Date;
 public class EntityGenerator {
 
 	// 数据源 url
-	static final String url = "jdbc:mysql://192.168.162.49:3306/gts?useUnicode=true&characterEncoding=utf8";
+	static final String url = "jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC";
 	// 数据库用户名
 	static final String username = "gts";
 	// 数据库密码
@@ -26,7 +26,7 @@ public class EntityGenerator {
 
 	@Tables(
 			// 设置数据库连接信息
-			url = url, username = username, password = password,
+			url = url, username = username, password = password,driver = "com.mysql.cj.jdbc.Driver",
 			// 设置entity类生成src目录, 相对于 user.dir
 			srcDir = "src/gens/java",
 			// 设置entity类的package值
