@@ -12,10 +12,10 @@ mybatis.type-handlers-package: com.dhb.gts.javacouse.week5.typehandler
 
 
 #数据源配置 默认Hikari
-spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
-spring.datasource.username: gts
-spring.datasource.password: mysql
-spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+#spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+#spring.datasource.username: gts
+#spring.datasource.password: mysql
+#spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 
 # 数据源配置 durid
 #spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -39,8 +39,6 @@ spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 #spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 #spring.datasource.type: org.apache.commons.dbcp2.BasicDataSource
 
-
-
 spring.datasource.initialSize: 5
 spring.datasource.minIdle: 5
 spring.datasource.maxActive: 20
@@ -53,6 +51,43 @@ spring.datasource.testOnReturn: false
 spring.datasource.poolPreparedStatements: true
 spring.datasource.maxPoolPreparedStatementPerConnectionSize: 20
 spring.datasource.filters: stat
+
+## 读写分离，多数据源配置
+#spring.datasource.dynamic.primary: master
+#spring.datasource.dynamic.strict: false
+#spring.datasource.dynamic.master.type: com.zaxxer.hikari.HikariDataSource
+#spring.datasource.dynamic.master.url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+#spring.datasource.dynamic.master.username: gts
+#spring.datasource.dynamic.master.password: mysql
+#spring.datasource.dynamic.master.driver-class-name: com.mysql.cj.jdbc.Driver
+#spring.datasource.dynamic.slave1.type: com.zaxxer.hikari.HikariDataSource
+#spring.datasource.dynamic.slave1.url: jdbc:mysql://192.168.161.115:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+#spring.datasource.dynamic.slave1.username: gts
+#spring.datasource.dynamic.slave1.password: mysql
+#spring.datasource.dynamic.slave1.driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 自定义的动态数据源配置
+custom:
+  datasource:
+    - key: master
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: gts
+      password: mysql
+      default: true
+    - key: slave1
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.161.115:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: gts
+      password: mysql
+    - key: slave2
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: gts
+      password: mysql 
 
 #线程池配置
 async.executor.thread.core_pool_size: 5
