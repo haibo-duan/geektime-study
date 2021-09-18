@@ -5,6 +5,7 @@ import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;
 import com.dhb.gts.javacourse.fluent.entity.OrderDetailEntity;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
 import com.dhb.gts.javacourse.fluent.helper.OrderSummaryMapping;
+import com.dhb.gts.javacourse.week7.dynamic.TargetDataSource;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -42,13 +43,13 @@ public class OrderService {
 	}
 	
 	@Async
-	
+	@TargetDataSource(name = "master")
 	public ListenableFuture<OrderSummaryEntity> asyncQueryOrderById(int order_id){
 		OrderSummaryEntity entity = orderSummaryDao.selectById(order_id);
 		return new AsyncResult<>(entity);
 	}
-	
-	
+
+	@TargetDataSource(name = "slave1")
 	public OrderSummaryEntity queryOrderById(int order_id){
 		return orderSummaryDao.selectById(order_id);
 	}
@@ -104,25 +105,11 @@ public class OrderService {
 	}
 
 	public void insertOrder(int orderId) {
-		OrderDetailEntity orderDetailEntity1 = new OrderDetailEntity()
-				.setOrderId(orderId)
-				.setProductId(10002)
-				.setProductName("手机钢化膜")
-				.setPrice(1400)
-				.setNumbers(2)
-				.setTotal(2800)
-				.setAverageCost(1200)
-				.setIsValidate(1);
+		OrderSummaryEntity orderSummaryEntity = buildOrderSummary(orderId);
+		orderSummaryDao.save(orderSummaryEntity);
+		OrderDetailEntity orderDetailEntity1 = buildOrderDetail1(orderId);
 		orderDetailDao.save(orderDetailEntity1);
-		OrderDetailEntity orderDetailEntity2 = new OrderDetailEntity()
-				.setOrderId(orderId)
-				.setProductId(10003)
-				.setProductName("手机壳")
-				.setPrice(700)
-				.setNumbers(4)
-				.setTotal(2800)
-				.setAverageCost(600)
-				.setIsValidate(1);
+		OrderDetailEntity orderDetailEntity2 =  buildOrderDetail2(orderId);
 		orderDetailDao.save(orderDetailEntity2);
 	}
 
