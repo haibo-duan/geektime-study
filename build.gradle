@@ -42,7 +42,7 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpcore-nio:4.4.14'
     implementation 'org.apache.httpcomponents:httpasyncclient:4.1.4'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
-    implementation 'mysql:mysql-connector-java:6.0.6'
+    implementation 'mysql:mysql-connector-java:8.0.25'
     implementation 'com.zaxxer:HikariCP:4.0.3'
     //  implementation 'com.alibaba:druid:1.2.6'
     //  implementation 'com.mchange:c3p0:0.9.5.5'
