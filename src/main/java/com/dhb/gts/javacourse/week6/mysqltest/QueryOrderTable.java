@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
 import com.dhb.gts.javacourse.fluent.helper.OrderSummaryMapping;
-import com.dhb.gts.javacourse.fluent.mapper.OrderDetailMapper;
-import com.dhb.gts.javacourse.fluent.mapper.OrderSummaryMapper;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
@@ -20,7 +18,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 public class QueryOrderTable {
-	
+
 	@Autowired
 	OrderSummaryDao orderSummaryDao;
 
