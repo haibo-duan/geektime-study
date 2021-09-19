@@ -76,6 +76,11 @@ custom:
       username: gts
       password: mysql
       default: true
+      initialSize: 20
+      minIdle: 5
+      maxActive: 30
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
     - key: slave1
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -90,11 +95,11 @@ custom:
       password: mysql 
 
 #线程池配置
-async.executor.thread.core_pool_size: 5
+async.executor.thread.core_pool_size: 20
 # 最大线程数
 async.executor.thread.max_pool_size: 20
 # 任务队列大小
-async.executor.thread.queue_capacity: 100
+async.executor.thread.queue_capacity: 1000
 # 线程池中线程的名称前缀
 async.executor.thread.name.prefix: async-service-
 # 缓冲队列中线程的空闲时间
