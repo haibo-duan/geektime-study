@@ -75,8 +75,10 @@ public class OrderService {
 		int orderId = maxOrderNo + 1;
 		long begin = System.currentTimeMillis();
 		List<OrderSummaryEntity> summarys = buildBatchOrderSummary(orderId, batchSize);
-		List<OrderDetailEntity> detials = buildBatcOrderDetail(orderId, batchSize);
-		batchInsert(summarys, detials);
+//		List<OrderDetailEntity> detials = buildBatcOrderDetail(orderId, batchSize);
+//		batchInsert(summarys, detials);
+		//只插入一张表的批次信息，不再向明细表插入数据，测试其效率
+		orderSummaryDao.save(summarys);
 		orderId += batchSize;
 		Long cost = System.currentTimeMillis() - begin;
 		log.info("ansyncInsertOrder batchSize is {} maxOrderNo is {}",batchSize,maxOrderNo);
