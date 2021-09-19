@@ -51,7 +51,7 @@ public class OrderService {
 		return new AsyncResult<>(entity);
 	}
 
-	@TargetDataSource(name = "slave1")
+	@TargetDataSource(name = "slave")
 	public OrderSummaryEntity queryOrderById(int order_id){
 		return orderSummaryDao.selectById(order_id);
 	}
