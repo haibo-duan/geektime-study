@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Future;
 
 @Service
 @Slf4j
@@ -42,8 +43,9 @@ public class OrderService {
 		log.info("通过线程池插入完成，共耗时:"+stopwatch.stop());
 	}
 	
-	@Async
+	
 	@TargetDataSource(name = "master")
+	@Async("taskExecutor")
 	public ListenableFuture<OrderSummaryEntity> asyncQueryOrderById(int order_id){
 		OrderSummaryEntity entity = orderSummaryDao.selectById(order_id);
 		return new AsyncResult<>(entity);
@@ -54,7 +56,7 @@ public class OrderService {
 		return orderSummaryDao.selectById(order_id);
 	}
 
-
+	@TargetDataSource(name = "slave1")
 	public List<OrderSummaryEntity> queryOrderByKey(String orderNo, String expressNo){
 		Map<String, Object> map = new HashMap<>();
 		if (Strings.isNotEmpty(orderNo)) {
@@ -65,7 +67,22 @@ public class OrderService {
 		}
 		return orderSummaryDao.selectByMap(map);
 	}
-
+	
+	
+	@TargetDataSource(name = "master")
+	@Async("taskExecutor")
+	public ListenableFuture<Integer> ansyncInsertOrder(int batchSize,int maxOrderNo){
+		int orderId = maxOrderNo + 1;
+		long begin = System.currentTimeMillis();
+		List<OrderSummaryEntity> summarys = buildBatchOrderSummary(orderId, batchSize);
+		List<OrderDetailEntity> detials = buildBatcOrderDetail(orderId, batchSize);
+		batchInsert(summarys, detials);
+		orderId += batchSize;
+		Long cost = System.currentTimeMillis() - begin;
+		log.info("ansyncInsertOrder batchSize is {} maxOrderNo is {}",batchSize,maxOrderNo);
+		return new AsyncResult<>(cost.intValue());
+	}
+	
 	public void randomBatchInsertOder(int totalSize, int batchSize) {
 		int maxOrderNo = getMaxOderNo();
 		List<Long> costs = Lists.newArrayList();
