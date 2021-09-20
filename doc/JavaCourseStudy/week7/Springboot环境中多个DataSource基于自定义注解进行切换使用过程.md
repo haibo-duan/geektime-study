@@ -42,19 +42,19 @@ custom:
 # 3.动态数据源配置
 
 数据源定义：
-[DynamicDataSource.java](../../../src/main/java/com/dhb/gts/javacourse/week7/dynamic/DynamicDataSource.java)
+[DynamicDataSource.java](../../../src/main/java/com/dhb/gts/javacourse/week7/v1/dynamic/DynamicDataSource.java)
 
 动态数据源切面配置：
-[DynamicDataSourceAspect.java](../../../src/main/java/com/dhb/gts/javacourse/week7/dynamic/DynamicDataSourceAspect.java)
+[DynamicDataSourceAspect.java](../../../src/main/java/com/dhb/gts/javacourse/week7/v1/dynamic/DynamicDataSourceAspect.java)
 
 数据源切换处理
-[DynamicDataSourceContextHolder.java](../../../src/main/java/com/dhb/gts/javacourse/week7/dynamic/DynamicDataSourceContextHolder.java)
+[DynamicDataSourceContextHolder.java](../../../src/main/java/com/dhb/gts/javacourse/week7/v1/dynamic/DynamicDataSourceContextHolder.java)
 
 数据源注册类
-[DynamicDataSourceRegister.java](../../../src/main/java/com/dhb/gts/javacourse/week7/dynamic/DynamicDataSourceRegister.java)
+[DynamicDataSourceRegister.java](../../../src/main/java/com/dhb/gts/javacourse/week7/v1/dynamic/DynamicDataSourceRegister.java)
 
 定义一个注解，在使用数据源的时候通过注解进行配置：
-[TargetDataSource.java](../../../src/main/java/com/dhb/gts/javacourse/week7/dynamic/TargetDataSource.java)
+[TargetDataSource.java](../../../src/main/java/com/dhb/gts/javacourse/week7/v1/dynamic/TargetDataSource.java)
 
 # 4.使用说明
 
