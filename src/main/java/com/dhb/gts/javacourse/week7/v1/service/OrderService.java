@@ -1,11 +1,11 @@
-package com.dhb.gts.javacourse.week7.service;
+package com.dhb.gts.javacourse.week7.v1.service;
 
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderDetailDao;
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;
 import com.dhb.gts.javacourse.fluent.entity.OrderDetailEntity;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
 import com.dhb.gts.javacourse.fluent.helper.OrderSummaryMapping;
-import com.dhb.gts.javacourse.week7.dynamic.TargetDataSource;
+import com.dhb.gts.javacourse.week7.v1.dynamic.TargetDataSource;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +16,11 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Future;
 
 @Service
 @Slf4j

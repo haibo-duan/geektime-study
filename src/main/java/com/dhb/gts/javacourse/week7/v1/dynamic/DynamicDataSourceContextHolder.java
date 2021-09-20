@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.week7.dynamic;
+package com.dhb.gts.javacourse.week7.v1.dynamic;
 
 import lombok.extern.slf4j.Slf4j;
 

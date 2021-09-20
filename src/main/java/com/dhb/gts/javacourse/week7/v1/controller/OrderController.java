@@ -1,13 +1,12 @@
-package com.dhb.gts.javacourse.week7.controller;
+package com.dhb.gts.javacourse.week7.v1.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
-import com.dhb.gts.javacourse.week7.service.OrderService;
+import com.dhb.gts.javacourse.week7.v1.service.OrderService;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
