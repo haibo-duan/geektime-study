@@ -48,6 +48,7 @@ dependencies {
     //  implementation 'com.mchange:c3p0:0.9.5.5'
     //  implementation 'org.apache.commons:commons-dbcp2:2.9.0'
     implementation 'com.alibaba:fastjson:1.2.78'
+    implementation 'org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:5.0.0-alpha'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.github.atool:fluent-mybatis:1.7.2'
     runtimeOnly 'com.github.atool:fluent-mybatis-processor:1.7.2'
