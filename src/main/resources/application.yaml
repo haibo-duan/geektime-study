@@ -104,3 +104,32 @@ async.executor.thread.queue_capacity: 1000
 async.executor.thread.name.prefix: async-service-
 # 缓冲队列中线程的空闲时间
 async.executor.thread.keep_alive_seconds: 100
+
+#shardingSphereJDBC配置
+spring.shardingsphere.datasource.names: master,slave1
+spring.shardingsphere.datasource.common.type: com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.common.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.master.jdbc-url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.shardingsphere.datasource.master.username: gts
+spring.shardingsphere.datasource.master.password: mysql
+spring.shardingsphere.datasource.slave1.jdbc-url: jdbc:mysql://192.168.161.115:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.shardingsphere.datasource.slave1.username: gts
+spring.shardingsphere.datasource.slave1.password: mysql
+
+# 主数据源名称
+spring.shardingsphere.rules.replica-query.data-sources.rw.primary-data-source-name: master
+# 从数据源名称，多个从数据源用逗号分隔
+spring.shardingsphere.rules.replica-query.data-sources.rw.replica-data-source-names: slave1
+# 负载均衡算法名称
+spring.shardingsphere.rules.replica-query.data-sources.rw.load-balancer-name: ROUND_ROBIN
+#spring.shardingsphere.rules.replica-query.load-balancers.round-robin.type: ROUND_ROBIN
+#spring.shardingsphere.rules.replica-query.load-balancers.round-robin.props.workId: 1
+#是否启用查询一致性路由
+spring.shardingsphere.rules.replica-query.data-sources.rw.query-consistent: true
+
+
+# 打开sql输出日志
+spring.shardingsphere.props.sql.show: true
+
+
+logging.level.org.springframework: debug
