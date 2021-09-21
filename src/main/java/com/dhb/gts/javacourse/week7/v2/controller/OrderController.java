@@ -2,7 +2,7 @@ package com.dhb.gts.javacourse.week7.v2.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
-import com.dhb.gts.javacourse.week7.v1.service.OrderService;
+import com.dhb.gts.javacourse.week7.v2.service.OrderService;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
