@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class OrderService {
 
 
 	@Async("taskExecutor")
+	@Transactional
 	public ListenableFuture<Integer> ansyncInsertOrder(int batchSize, int maxOrderNo) {
 		int orderId = maxOrderNo + 1;
 		long begin = System.currentTimeMillis();
