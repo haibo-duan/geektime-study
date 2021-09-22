@@ -84,13 +84,13 @@ custom:
     - key: slave1
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.161.115:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+      url: jdbc:mysql://192.168.161.115:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC&defaultStatementTimeout=60
       username: gts
       password: mysql
     - key: slave2
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+      url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC&defaultStatementTimeout=60
       username: gts
       password: mysql 
 
@@ -99,7 +99,7 @@ async.executor.thread.core_pool_size: 20
 # 最大线程数
 async.executor.thread.max_pool_size: 20
 # 任务队列大小
-async.executor.thread.queue_capacity: 1000
+async.executor.thread.queue_capacity: 50
 # 线程池中线程的名称前缀
 async.executor.thread.name.prefix: async-service-
 # 缓冲队列中线程的空闲时间
@@ -109,6 +109,10 @@ async.executor.thread.keep_alive_seconds: 100
 spring.shardingsphere.datasource.names: master,slave1
 spring.shardingsphere.datasource.common.type: com.zaxxer.hikari.HikariDataSource
 spring.shardingsphere.datasource.common.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.common.maxWait: 60000
+spring.shardingsphere.datasource.common.initialSize: 5
+spring.shardingsphere.datasource.common.minIdle: 5
+spring.shardingsphere.datasource.common.maxActive: 20
 spring.shardingsphere.datasource.master.jdbc-url: jdbc:mysql://192.168.161.114:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
 spring.shardingsphere.datasource.master.username: gts
 spring.shardingsphere.datasource.master.password: mysql
