@@ -42,7 +42,7 @@ public class OrderSummaryEntity extends RichEntity {
    * 订单ID
    */
   @TableId("ORDER_ID")
-  private Integer orderId;
+  private Long orderId;
 
   /**
    * 创建时间
