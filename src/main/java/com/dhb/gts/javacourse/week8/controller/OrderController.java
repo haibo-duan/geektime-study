@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Future;
 
 @RestController
@@ -56,8 +57,8 @@ public class OrderController {
 	@RequestMapping("/randomInsertOneOrder")
 	public String randomInsertOneOrder() {
 		Stopwatch stopwatch = Stopwatch.createStarted();
-		int orderNo = orderService.getMaxOderNo();
-		orderService.insertOrder(orderNo+1);
+		Random random = new Random(10000);
+		orderService.insertOrder(random.nextInt());
 		log.info("randomInsertOneOrder cost time :"+ stopwatch.stop());
 		return "success";
 	}
@@ -65,7 +66,7 @@ public class OrderController {
 	@RequestMapping("/queryByKey")
 	public String queryByKey(String key) {
 		Stopwatch stopwatch = Stopwatch.createStarted();
-		Integer orde_id = Integer.parseInt(key);
+		Long orde_id = Long.parseLong(key);
 		OrderSummaryEntity entity = orderService.queryOrderById(orde_id);
 		stopwatch.stop();
 		log.info("通过key查询，走索引耗时：" + stopwatch);
