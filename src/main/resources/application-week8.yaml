@@ -1,0 +1,59 @@
+server:
+  port: 8084
+  
+#线程池配置
+async.executor.thread.core_pool_size: 20
+# 最大线程数
+async.executor.thread.max_pool_size: 20
+# 任务队列大小
+async.executor.thread.queue_capacity: 50
+# 线程池中线程的名称前缀
+async.executor.thread.name.prefix: async-service-
+# 缓冲队列中线程的空闲时间
+async.executor.thread.keep_alive_seconds: 100
+
+#shardingSphereJDBC配置
+spring.shardingsphere.datasource.names: gts01,gts02
+spring.shardingsphere.datasource.common.type: com.zaxxer.hikari.HikariDataSource
+spring.shardingsphere.datasource.common.driver-class-name: com.mysql.cj.jdbc.Driver
+spring.shardingsphere.datasource.common.maxWait: 60000
+spring.shardingsphere.datasource.common.initialSize: 5
+spring.shardingsphere.datasource.common.minIdle: 5
+spring.shardingsphere.datasource.common.maxActive: 20
+spring.shardingsphere.datasource.gts01.jdbc-url: jdbc:mysql://192.168.161.114:3306/gts01?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.shardingsphere.datasource.gts01.username: gts
+spring.shardingsphere.datasource.gts01.password: mysql
+spring.shardingsphere.datasource.gts02.jdbc-url: jdbc:mysql://192.168.161.114:3306/gts02?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.shardingsphere.datasource.gts02.username: gts
+spring.shardingsphere.datasource.gts02.password: mysql
+
+#配置 t_order 表规则
+spring.shardingsphere.rules.sharding.tables.t_order_summary.actual-data-nodes: gts01.t_order_summary_$->{1..16},gts02.t_order_summary_$->{17..32}
+# 配置分库策略
+spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-column: customer_id
+spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-algorithm-name: database_inline
+
+# 配置分表策略
+spring.shardingsphere.rules.sharding.tables.t_order_summary.table-strategy.standard.sharding-column: order_id
+spring.shardingsphere.rules.sharding.tables.t_order_summary.table-strategy.standard.sharding-algorithm-name: t-order-inline
+
+# 分布式序列策略配置
+spring.shardingsphere.rules.sharding.tables.t_order_summary.key-generate-strategy.column: order_id
+spring.shardingsphere.rules.sharding.tables.t_order_summary.key-generate-strategy.key-generator-name: snowflake
+
+
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type: inline
+spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression: gts0$->{customer_id % 2 + 1}
+spring.shardingsphere.rules.sharding.sharding-algorithms.t-order-inline.type: inline
+spring.shardingsphere.rules.sharding.sharding-algorithms.t-order-inline.props.algorithm-expression: t_order_summary_$->{order_id % 32 + 1}
+
+
+spring.shardingsphere.rules.sharding.key-generators.snowflake.type: snowflake
+spring.shardingsphere.rules.sharding.key-generators.snowflake.props.worker-id: 123
+
+
+# 打开sql输出日志
+spring.shardingsphere.props.sql.show: true
+
+
+logging.level.org.springframework: debug
