@@ -1,0 +1,48 @@
+server:
+  port: 8084
+
+#数据源配置 默认Hikari
+spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.datasource.username: gts
+spring.datasource.password: mysql
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 数据源配置 durid
+#spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+#spring.datasource.username: gts
+#spring.datasource.password: mysql
+#spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+#spring.datasource.type: com.alibaba.druid.pool.DruidDataSource
+
+## C3P0
+#spring.datasource.jdbcUrl: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+#spring.datasource.user: gts
+#spring.datasource.password: mysql
+#spring.datasource.driverClass: com.mysql.cj.jdbc.Driver
+#spring.datasource.type: com.mchange.v2.c3p0.ComboPooledDataSource
+
+
+# DBCP
+#spring.datasource.url: jdbc:mysql://192.168.162.49:3306/gts?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
+#spring.datasource.username: gts
+#spring.datasource.password: mysql
+#spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
+#spring.datasource.type: org.apache.commons.dbcp2.BasicDataSource
+
+
+spring.datasource.initialSize: 5
+spring.datasource.minIdle: 5
+spring.datasource.maxActive: 20
+spring.datasource.maxWait: 60000
+spring.datasource.timeBetweenEvictionRunsMillis: 60000
+spring.datasource.validationQuery: SELECT 1
+spring.datasource.testWhileIdle: true
+spring.datasource.testOnBorrow: false
+spring.datasource.testOnReturn: false
+spring.datasource.poolPreparedStatements: true
+spring.datasource.maxPoolPreparedStatementPerConnectionSize: 20
+spring.datasource.filters: stat
+
+
+
+logging.level.org.springframework: debug
