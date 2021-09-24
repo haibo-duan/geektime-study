@@ -9,6 +9,8 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
+import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -48,7 +50,7 @@ public class OrderService {
 		return new AsyncResult<>(entity);
 	}
 
-	public OrderSummaryEntity queryOrderById(int order_id) {
+	public OrderSummaryEntity queryOrderById(long order_id) {
 		return orderSummaryDao.selectById(order_id);
 	}
 
@@ -63,8 +65,55 @@ public class OrderService {
 		return orderSummaryDao.selectByMap(map);
 	}
 
+	@ShardingTransactionType(TransactionType.XA)
+	@Transactional
+	public void xaTransactionTest() {
+		int max = this.getMaxOderNo();
+		OrderSummaryEntity entity1 = new OrderSummaryEntity()
+				.setOrderNo(200000001)
+				.setConsigneeAddress("北京市朝阳区西坝河")
+				.setConsigneeName("张三")
+				.setConsigneePhone("13888888888")
+				.setCustomerId(11000001)
+				.setExpressNo("3400000001")
+				.setExpressComp("顺丰")
+				.setPaymentMethod(1)
+				.setPaymentMoney(5600)
+				.setOrderAmount(5600)
+				.setIsValidate(1);
+		orderSummaryDao.save(entity1);
+		OrderSummaryEntity entity2 = new OrderSummaryEntity()
+				.setOrderNo(200000002)
+				.setConsigneeAddress("北京市朝阳区西坝河")
+				.setConsigneeName("张三")
+				.setConsigneePhone("13888888888")
+				.setCustomerId(11000002)
+				.setExpressNo("3400000001")
+				.setExpressComp("顺丰")
+				.setPaymentMethod(1)
+				.setPaymentMoney(5600)
+				.setOrderAmount(5600)
+				.setIsValidate(1);
+		orderSummaryDao.save(entity2);
+		OrderSummaryEntity entity3 = new OrderSummaryEntity()
+				.setOrderNo(200000003)
+				.setConsigneeAddress("北京市朝阳区西坝河")
+				.setConsigneeName("张三")
+				.setConsigneePhone("13888888888")
+				.setCustomerId(11000003)
+				.setExpressNo("3400000001")
+				.setExpressComp("顺丰")
+				.setPaymentMethod(1)
+				.setPaymentMoney(5600)
+				.setOrderAmount(5600)
+				.setIsValidate(1);
+		orderSummaryDao.save(entity3);
+		int i = 1/0;
+	}
+	
 
 	@Async("taskExecutor")
+	@ShardingTransactionType(TransactionType.XA)
 	@Transactional
 	public ListenableFuture<Integer> ansyncInsertOrder(int batchSize, int maxOrderNo) {
 		int orderId = maxOrderNo + 1;

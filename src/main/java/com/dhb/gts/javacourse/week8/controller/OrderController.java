@@ -2,7 +2,7 @@ package com.dhb.gts.javacourse.week8.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dhb.gts.javacourse.fluent.entity.OrderSummaryEntity;
-import com.dhb.gts.javacourse.week7.v2.service.OrderService;
+import com.dhb.gts.javacourse.week8.service.OrderService;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Future;
 
 @RestController
@@ -57,8 +56,7 @@ public class OrderController {
 	@RequestMapping("/randomInsertOneOrder")
 	public String randomInsertOneOrder() {
 		Stopwatch stopwatch = Stopwatch.createStarted();
-		Random random = new Random(10000);
-		orderService.insertOrder(random.nextInt());
+		orderService.insertOrder(orderService.getMaxOderNo() + 1);
 		log.info("randomInsertOneOrder cost time :"+ stopwatch.stop());
 		return "success";
 	}
@@ -85,6 +83,13 @@ public class OrderController {
 	@RequestMapping("/asyncInsertRandomOrder")
 	public String asyncInsertRandomOrder() {
 		orderService.asyncInsertRandomOrder();
+		log.info("调用异步方法插入一个订单！");
+		return "success";
+	}
+
+	@RequestMapping("/xaTransactionTest")
+	public String xaTransactionTest() {
+		orderService.xaTransactionTest();
 		log.info("调用异步方法插入一个订单！");
 		return "success";
 	}
