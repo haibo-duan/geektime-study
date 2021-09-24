@@ -32,7 +32,7 @@ import lombok.experimental.Accessors;
     callSuper = false
 )
 @FluentMybatis(
-    table = "T_ORDER_SUMMARY",
+    table = "t_order_summary",
     schema = "gts"
 )
 public class OrderSummaryEntity extends RichEntity {
@@ -41,14 +41,14 @@ public class OrderSummaryEntity extends RichEntity {
   /**
    * 订单ID
    */
-  @TableId("ORDER_ID")
+  @TableId("order_id")
   private Long orderId;
 
   /**
    * 创建时间
    */
   @TableField(
-      value = "CREATE_TIME",
+      value = "create_time",
       insert = "now()"
   )
   private Date createTime;
@@ -57,7 +57,7 @@ public class OrderSummaryEntity extends RichEntity {
    * 最新更新时间
    */
   @TableField(
-      value = "UPDATE_TIME",
+      value = "update_time",
       insert = "now()",
       update = "now()"
   )
@@ -67,7 +67,7 @@ public class OrderSummaryEntity extends RichEntity {
    * 数据是否有效标识：1有效数据，2 无效数据
    */
   @TableField(
-      value = "IS_VALIDATE",
+      value = "is_validate",
       insert = "0"
   )
   @LogicDelete
@@ -76,61 +76,61 @@ public class OrderSummaryEntity extends RichEntity {
   /**
    * 收货人详细
    */
-  @TableField("CONSIGNEE_ADDRESS")
+  @TableField("consignee_address")
   private String consigneeAddress;
 
   /**
    * 收货人姓名
    */
-  @TableField("CONSIGNEE_NAME")
+  @TableField("consignee_name")
   private String consigneeName;
 
   /**
    * 收货人联系电话
    */
-  @TableField("CONSIGNEE_PHONE")
+  @TableField("consignee_phone")
   private String consigneePhone;
 
   /**
    * 下单用户ID
    */
-  @TableField("CUSTOMER_ID")
+  @TableField("customer_id")
   private Integer customerId;
 
   /**
    * 快递公司名称
    */
-  @TableField("EXPRESS_COMP")
+  @TableField("express_comp")
   private String expressComp;
 
   /**
    * 快递单号
    */
-  @TableField("EXPRESS_NO")
+  @TableField("express_no")
   private String expressNo;
 
   /**
    * 订单汇总金额 单位 分  此处为int,比bigint节约4个字节
    */
-  @TableField("ORDER_AMOUNT")
+  @TableField("order_amount")
   private Integer orderAmount;
 
   /**
    * 订单编号
    */
-  @TableField("ORDER_NO")
+  @TableField("order_no")
   private Integer orderNo;
 
   /**
    * 支付方式：1现金，2余额，3网银，4支付宝，5微信
    */
-  @TableField("PAYMENT_METHOD")
+  @TableField("payment_method")
   private Integer paymentMethod;
 
   /**
    * 支付金额  单位 分  此处为int,比bigint节约4个字节
    */
-  @TableField("PAYMENT_MONEY")
+  @TableField("payment_money")
   private Integer paymentMoney;
 
   @Override
