@@ -32,9 +32,6 @@ spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding
 spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name: database-inline
 #配置 t_order 表规则
 spring.shardingsphere.rules.sharding.tables.t_order_summary.actual-data-nodes: gts0$->{1..2}.t_order_summary_$->{1..16}
-# 配置分库策略
-spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-column: customer_id
-spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-algorithm-name: database-inline
 
 # 配置分表策略
 spring.shardingsphere.rules.sharding.tables.t_order_summary.table-strategy.standard.sharding-column: order_id
