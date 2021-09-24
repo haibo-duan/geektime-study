@@ -27,11 +27,14 @@ spring.shardingsphere.datasource.gts02.jdbc-url: jdbc:mysql://192.168.161.114:33
 spring.shardingsphere.datasource.gts02.username: gts
 spring.shardingsphere.datasource.gts02.password: mysql
 
+# 配置分库策略
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-column: customer_id
+spring.shardingsphere.rules.sharding.default-database-strategy.standard.sharding-algorithm-name: database-inline
 #配置 t_order 表规则
-spring.shardingsphere.rules.sharding.tables.t_order_summary.actual-data-nodes: gts01.t_order_summary_$->{1..16},gts02.t_order_summary_$->{17..32}
+spring.shardingsphere.rules.sharding.tables.t_order_summary.actual-data-nodes: gts0$->{1..2}.t_order_summary_$->{1..16}
 # 配置分库策略
 spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-column: customer_id
-spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-algorithm-name: database_inline
+spring.shardingsphere.rules.sharding.tables.t_order_summary.database-strategy.standard.sharding-algorithm-name: database-inline
 
 # 配置分表策略
 spring.shardingsphere.rules.sharding.tables.t_order_summary.table-strategy.standard.sharding-column: order_id
@@ -45,7 +48,7 @@ spring.shardingsphere.rules.sharding.tables.t_order_summary.key-generate-strateg
 spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.type: inline
 spring.shardingsphere.rules.sharding.sharding-algorithms.database-inline.props.algorithm-expression: gts0$->{customer_id % 2 + 1}
 spring.shardingsphere.rules.sharding.sharding-algorithms.t-order-inline.type: inline
-spring.shardingsphere.rules.sharding.sharding-algorithms.t-order-inline.props.algorithm-expression: t_order_summary_$->{order_id % 32 + 1}
+spring.shardingsphere.rules.sharding.sharding-algorithms.t-order-inline.props.algorithm-expression: t_order_summary_$->{order_id % 16 + 1}
 
 
 spring.shardingsphere.rules.sharding.key-generators.snowflake.type: snowflake
@@ -53,7 +56,7 @@ spring.shardingsphere.rules.sharding.key-generators.snowflake.props.worker-id: 1
 
 
 # 打开sql输出日志
-spring.shardingsphere.props.sql.show: true
-
+spring.shardingsphere.props.sql-show: true
+#spring.shardingsphere.props.sql-simple: true
 
 logging.level.org.springframework: debug
