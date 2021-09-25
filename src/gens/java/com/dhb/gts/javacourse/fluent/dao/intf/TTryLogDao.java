@@ -11,4 +11,7 @@ import com.dhb.gts.javacourse.fluent.entity.TTryLogEntity;
  * <p/>@author Powered By Fluent Mybatis
  */
 public interface TTryLogDao extends IBaseDao<TTryLogEntity> {
+
+	public boolean isExist(String transId);
+	
 }

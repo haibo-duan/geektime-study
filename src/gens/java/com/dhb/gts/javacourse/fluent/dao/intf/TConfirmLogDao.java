@@ -11,4 +11,7 @@ import com.dhb.gts.javacourse.fluent.entity.TConfirmLogEntity;
  * <p/>@author Powered By Fluent Mybatis
  */
 public interface TConfirmLogDao extends IBaseDao<TConfirmLogEntity> {
+
+	public boolean isExist(String transId);
+	
 }

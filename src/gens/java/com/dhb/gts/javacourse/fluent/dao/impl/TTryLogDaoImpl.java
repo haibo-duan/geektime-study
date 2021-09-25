@@ -13,4 +13,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class TTryLogDaoImpl extends TTryLogBaseDao implements TTryLogDao {
+
+	@Override
+	public boolean isExist(String transId) {
+		return this.mapper.existPk(transId);
+	}
 }

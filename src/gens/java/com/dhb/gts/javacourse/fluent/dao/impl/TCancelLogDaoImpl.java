@@ -13,4 +13,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class TCancelLogDaoImpl extends TCancelLogBaseDao implements TCancelLogDao {
+
+	@Override
+	public boolean isExist(String transId) {
+		return this.mapper.existPk(transId);
+	}
 }

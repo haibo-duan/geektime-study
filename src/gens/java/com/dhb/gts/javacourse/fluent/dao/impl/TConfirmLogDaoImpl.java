@@ -13,4 +13,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class TConfirmLogDaoImpl extends TConfirmLogBaseDao implements TConfirmLogDao {
+
+	@Override
+	public boolean isExist(String transId) {
+		return this.mapper.existPk(transId);
+	}
 }

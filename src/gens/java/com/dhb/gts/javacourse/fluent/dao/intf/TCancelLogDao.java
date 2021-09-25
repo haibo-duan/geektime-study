@@ -11,4 +11,6 @@ import com.dhb.gts.javacourse.fluent.entity.TCancelLogEntity;
  * <p/>@author Powered By Fluent Mybatis
  */
 public interface TCancelLogDao extends IBaseDao<TCancelLogEntity> {
+	
+	public boolean isExist(String transId);
 }
