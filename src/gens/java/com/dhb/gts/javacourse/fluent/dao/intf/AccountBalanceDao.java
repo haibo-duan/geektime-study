@@ -11,4 +11,9 @@ import com.dhb.gts.javacourse.fluent.entity.AccountBalanceEntity;
  * <p/>@author Powered By Fluent Mybatis
  */
 public interface AccountBalanceDao extends IBaseDao<AccountBalanceEntity> {
+	
+	boolean subtractAccountBalance(int customerId, int amount);
+	
+	boolean addAccountBalance(int customerId,int amount);
+	
 }

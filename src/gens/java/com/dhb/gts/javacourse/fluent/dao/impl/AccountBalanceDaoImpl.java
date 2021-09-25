@@ -2,6 +2,7 @@ package com.dhb.gts.javacourse.fluent.dao.impl;
 
 import com.dhb.gts.javacourse.fluent.dao.base.AccountBalanceBaseDao;
 import com.dhb.gts.javacourse.fluent.dao.intf.AccountBalanceDao;
+import com.dhb.gts.javacourse.fluent.wrapper.AccountBalanceUpdate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +14,20 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AccountBalanceDaoImpl extends AccountBalanceBaseDao implements AccountBalanceDao {
+
+	@Override
+	public boolean subtractAccountBalance(int customerId, int amount) {
+		AccountBalanceUpdate update = new AccountBalanceUpdate()
+				.set.balance().applyFunc("amount - ?",amount).end()
+				.where.customerId().eq(customerId).end();
+		return this.mapper.updateBy(update) > 0;
+	}
+
+	@Override
+	public boolean addAccountBalance(int customerId, int amount) {
+		AccountBalanceUpdate update = new AccountBalanceUpdate()
+				.set.balance().applyFunc("amount + ?",amount).end()
+				.where.customerId().eq(customerId).end();
+		return this.mapper.updateBy(update) > 0;
+	}
 }
