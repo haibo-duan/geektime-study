@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.week8.service;
+package com.dhb.gts.javacourse.week8.ss.service;
 
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderDetailDao;
 import com.dhb.gts.javacourse.fluent.dao.intf.OrderSummaryDao;

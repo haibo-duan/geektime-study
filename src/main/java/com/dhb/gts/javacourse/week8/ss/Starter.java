@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.week8;
+package com.dhb.gts.javacourse.week8.ss;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
