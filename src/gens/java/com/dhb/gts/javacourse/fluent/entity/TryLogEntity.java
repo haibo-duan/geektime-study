@@ -24,49 +24,49 @@ import lombok.experimental.Accessors;
 @SuppressWarnings({"unchecked"})
 @Data
 @Accessors(
-    chain = true
+		chain = true
 )
 @EqualsAndHashCode(
-    callSuper = false
+		callSuper = false
 )
 @FluentMybatis(
-    table = "t_try_log",
-    schema = "gts01"
+		table = "t_try_log",
+		schema = "gts01"
 )
 public class TryLogEntity extends RichEntity {
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  /**
-   * 事务id
-   */
-  @TableId(
-      value = "tx_no",
-      auto = false
-  )
-  private String txNo;
+	/**
+	 * 事务id
+	 */
+	@TableId(
+			value = "tx_no",
+			auto = false
+	)
+	private String txNo;
 
-  /**
-   */
-  @TableField("create_time")
-  private Date createTime;
+	/**
+	 */
+	@TableField("create_time")
+	private Date createTime;
 
-  @Override
-  public Serializable findPk() {
-    return this.txNo;
-  }
+	@Override
+	public Serializable findPk() {
+		return this.txNo;
+	}
 
-  @Override
-  public final Class<? extends IEntity> entityClass() {
-    return TryLogEntity.class;
-  }
+	@Override
+	public final Class<? extends IEntity> entityClass() {
+		return TryLogEntity.class;
+	}
 
-  @Override
-  public final TryLogEntity changeTableBelongTo(TableSupplier supplier) {
-    return super.changeTableBelongTo(supplier);
-  }
+	@Override
+	public final TryLogEntity changeTableBelongTo(TableSupplier supplier) {
+		return super.changeTableBelongTo(supplier);
+	}
 
-  @Override
-  public final TryLogEntity changeTableBelongTo(String table) {
-    return super.changeTableBelongTo(table);
-  }
+	@Override
+	public final TryLogEntity changeTableBelongTo(String table) {
+		return super.changeTableBelongTo(table);
+	}
 }
