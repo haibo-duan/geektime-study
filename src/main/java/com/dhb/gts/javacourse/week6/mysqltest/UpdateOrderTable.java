@@ -28,7 +28,7 @@ public class UpdateOrderTable {
 //		}else {
 //			orderId = random.nextInt(maxOrderId);
 //		}
-		int orderId = random.nextInt(2100000-50000)+50000;
+		long orderId = random.nextInt(2100000-50000)+50000;
 		OrderSummaryEntity where = new OrderSummaryEntity()
 				.setOrderId(orderId);
 		OrderSummaryEntity 	update = new OrderSummaryEntity()
