@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.fluent.entity;
+package com.dhb.hmilytcc.bank1.fluent.entity;
 
 import cn.org.atool.fluent.mybatis.annotation.FluentMybatis;
 import cn.org.atool.fluent.mybatis.annotation.TableField;
@@ -8,6 +8,8 @@ import cn.org.atool.fluent.mybatis.base.RichEntity;
 import cn.org.atool.fluent.mybatis.functions.TableSupplier;
 import java.io.Serializable;
 import java.lang.Class;
+import java.lang.Integer;
+import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
@@ -17,7 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * TTryLogEntity: 数据映射实体定义
+ * AccountBalanceEntity: 数据映射实体定义
  *
  * @author Powered By Fluent Mybatis
  */
@@ -30,43 +32,65 @@ import lombok.experimental.Accessors;
     callSuper = false
 )
 @FluentMybatis(
-    table = "t_try_log",
+    table = "t_account_balance",
     schema = "gts01"
 )
-public class TTryLogEntity extends RichEntity {
+public class AccountBalanceEntity extends RichEntity {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 事务id
+   * 主键 自增列
    */
-  @TableId(
-      value = "tx_no",
-      auto = false
-  )
-  private String txNo;
+  @TableId("id")
+  private Integer id;
 
   /**
+   * 用户注册时间
    */
   @TableField("create_time")
   private Date createTime;
 
+  /**
+   * 最后修改时间
+   */
+  @TableField("update_time")
+  private Date updateTime;
+
+  /**
+   * 数据是否有效标识：1有效数据，2 无效数据
+   */
+  @TableField("is_validate")
+  private Integer isValidate;
+
+  /**
+   * 客户余额 单位 分
+   */
+  @TableField("balance")
+  private Long balance;
+
+  /**
+   * 用户编号
+   */
+  @TableField("customer_id")
+  private Integer customerId;
+
   @Override
   public Serializable findPk() {
-    return this.txNo;
+    return this.id;
   }
 
   @Override
   public final Class<? extends IEntity> entityClass() {
-    return TTryLogEntity.class;
+    return AccountBalanceEntity.class;
   }
 
   @Override
-  public final TTryLogEntity changeTableBelongTo(TableSupplier supplier) {
+  public final AccountBalanceEntity changeTableBelongTo(TableSupplier supplier) {
     return super.changeTableBelongTo(supplier);
   }
 
   @Override
-  public final TTryLogEntity changeTableBelongTo(String table) {
+  public final AccountBalanceEntity changeTableBelongTo(String table) {
     return super.changeTableBelongTo(table);
   }
 }

@@ -1,4 +1,4 @@
-package com.dhb.gts.javacourse.fluent.entity;
+package com.dhb.hmilytcc.bank1.fluent.entity;
 
 import cn.org.atool.fluent.mybatis.annotation.FluentMybatis;
 import cn.org.atool.fluent.mybatis.annotation.TableField;
@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * TCancelLogEntity: 数据映射实体定义
+ * CancleLogEntity: 数据映射实体定义
  *
  * @author Powered By Fluent Mybatis
  */
@@ -33,7 +33,7 @@ import lombok.experimental.Accessors;
     table = "t_cancel_log",
     schema = "gts01"
 )
-public class TCancelLogEntity extends RichEntity {
+public class CancleLogEntity extends RichEntity {
   private static final long serialVersionUID = 1L;
 
   /**
@@ -57,16 +57,16 @@ public class TCancelLogEntity extends RichEntity {
 
   @Override
   public final Class<? extends IEntity> entityClass() {
-    return TCancelLogEntity.class;
+    return CancleLogEntity.class;
   }
 
   @Override
-  public final TCancelLogEntity changeTableBelongTo(TableSupplier supplier) {
+  public final CancleLogEntity changeTableBelongTo(TableSupplier supplier) {
     return super.changeTableBelongTo(supplier);
   }
 
   @Override
-  public final TCancelLogEntity changeTableBelongTo(String table) {
+  public final CancleLogEntity changeTableBelongTo(String table) {
     return super.changeTableBelongTo(table);
   }
 }
