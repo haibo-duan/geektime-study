@@ -35,11 +35,11 @@ public class EntityGenerator {
 			daoDir = "src/gens/java",
 			// 设置哪些表要生成Entity文件
 			tables = {
-					@Table(value = {"t_try_log"},
+					@Table(value = {"t_try_log:TryLog"},
 							gmtCreated = "CREATE_TIME"),
-					@Table(value = {"t_confirm_log"},
+					@Table(value = {"t_confirm_log:ConfirmLog"},
 							gmtCreated = "CREATE_TIME"),
-					@Table(value = {"t_cancel_log"},
+					@Table(value = {"t_cancel_log:CancleLog"},
 							gmtCreated = "CREATE_TIME")
 			}
 	)
