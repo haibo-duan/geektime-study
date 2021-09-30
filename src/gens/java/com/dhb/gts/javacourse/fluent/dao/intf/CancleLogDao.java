@@ -12,5 +12,8 @@ import com.dhb.gts.javacourse.fluent.entity.CancleLogEntity;
  */
 public interface CancleLogDao extends IBaseDao<CancleLogEntity> {
 
-	public boolean isExist(String transId);
+	boolean isExist(String transId);
+
+	void addCancle(String transId);
+	
 }

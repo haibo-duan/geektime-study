@@ -2,6 +2,7 @@ package com.dhb.gts.javacourse.fluent.dao.impl;
 
 import com.dhb.gts.javacourse.fluent.dao.base.TryLogBaseDao;
 import com.dhb.gts.javacourse.fluent.dao.intf.TryLogDao;
+import com.dhb.gts.javacourse.fluent.entity.TryLogEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,5 +18,12 @@ public class TryLogDaoImpl extends TryLogBaseDao implements TryLogDao {
 	@Override
 	public boolean isExist(String transId) {
 		return this.mapper.existPk(transId);
+	}
+
+	@Override
+	public void addTry(String transId) {
+		TryLogEntity entity = new TryLogEntity()
+				.setTxNo(transId);
+		this.mapper.save(entity);
 	}
 }

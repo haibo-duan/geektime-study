@@ -2,6 +2,7 @@ package com.dhb.gts.javacourse.fluent.dao.impl;
 
 import com.dhb.gts.javacourse.fluent.dao.base.ConfirmLogBaseDao;
 import com.dhb.gts.javacourse.fluent.dao.intf.ConfirmLogDao;
+import com.dhb.gts.javacourse.fluent.entity.ConfirmLogEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,5 +18,12 @@ public class ConfirmLogDaoImpl extends ConfirmLogBaseDao implements ConfirmLogDa
 	@Override
 	public boolean isExist(String transId) {
 		return this.mapper.existPk(transId);
+	}
+
+	@Override
+	public void addConfirm(String transId) {
+		ConfirmLogEntity entity = new ConfirmLogEntity()
+				.setTxNo(transId);
+		this.mapper.save(entity);
 	}
 }

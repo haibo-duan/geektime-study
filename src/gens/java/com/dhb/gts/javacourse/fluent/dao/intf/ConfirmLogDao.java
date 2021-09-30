@@ -13,4 +13,6 @@ import com.dhb.gts.javacourse.fluent.entity.ConfirmLogEntity;
 public interface ConfirmLogDao extends IBaseDao<ConfirmLogEntity> {
 
 	public boolean isExist(String transId);
+	
+	public void addConfirm(String transId);
 }

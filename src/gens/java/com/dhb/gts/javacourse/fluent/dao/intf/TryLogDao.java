@@ -12,5 +12,7 @@ import com.dhb.gts.javacourse.fluent.entity.TryLogEntity;
  */
 public interface TryLogDao extends IBaseDao<TryLogEntity> {
 
-	public boolean isExist(String transId);
+	boolean isExist(String transId);
+	
+	void addTry(String transId);
 }
