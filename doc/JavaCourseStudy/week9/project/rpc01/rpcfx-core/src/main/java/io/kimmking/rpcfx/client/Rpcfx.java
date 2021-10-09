@@ -99,6 +99,12 @@ public final class Rpcfx {
             // 这里判断response.status，处理异常
             // 考虑封装一个全局的RpcfxException
 
+            if(!response.isStatus()){
+                //出现异常
+                Exception e = response.getException();
+                e.printStackTrace();
+                throw e;
+            }
             return JSON.parse(response.getResult().toString());
         }
     }
