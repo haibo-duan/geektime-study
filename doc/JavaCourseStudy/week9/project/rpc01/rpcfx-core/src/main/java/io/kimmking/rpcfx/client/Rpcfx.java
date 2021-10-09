@@ -91,8 +91,8 @@ public final class Rpcfx {
                 }
             }
 
-            RpcfxResponse response = post(request, url);
-
+            RequestHandler handler = new NettyHandler();
+            RpcfxResponse response = handler.handler(request,url);
             // 加filter地方之三
             // Student.setTeacher("cuijing");
 
@@ -100,22 +100,6 @@ public final class Rpcfx {
             // 考虑封装一个全局的RpcfxException
 
             return JSON.parse(response.getResult().toString());
-        }
-
-        private RpcfxResponse post(RpcfxRequest req, String url) throws IOException {
-            String reqJson = JSON.toJSONString(req);
-            System.out.println("req json: "+reqJson);
-
-            // 1.可以复用client
-            // 2.尝试使用httpclient或者netty client
-            OkHttpClient client = new OkHttpClient();
-            final Request request = new Request.Builder()
-                    .url(url)
-                    .post(RequestBody.create(JSONTYPE, reqJson))
-                    .build();
-            String respJson = client.newCall(request).execute().body().string();
-            System.out.println("resp json: "+respJson);
-            return JSON.parseObject(respJson, RpcfxResponse.class);
         }
     }
 }
