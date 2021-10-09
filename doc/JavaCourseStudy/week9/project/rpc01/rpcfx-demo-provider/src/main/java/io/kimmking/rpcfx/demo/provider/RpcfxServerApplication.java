@@ -84,7 +84,7 @@ public class RpcfxServerApplication {
 
 	@Bean
 	public RpcfxResolver createResolver(){
-		return new DemoResolver();
+		return new ReflectResolver();
 	}
 
 	// 能否去掉name
