@@ -1,0 +1,14 @@
+
+spring:
+  application:
+    name: bank-transfer-client
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: none
+dubbo:
+  scan:
+    base-packages: com.dhb.bank.transfer.client
+  registry:
+    address: zookeeper://localhost:2181
+  metadata-report:
+    address: zookeeper://localhost:2181
