@@ -2,6 +2,7 @@ package com.dhb.bank.transfer.orm.dao.impl;
 
 import com.dhb.bank.transfer.orm.dao.base.BankFreezeBaseDao;
 import com.dhb.bank.transfer.orm.dao.intf.BankFreezeDao;
+import com.dhb.bank.transfer.orm.wrapper.BankFreezeUpdate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +14,20 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class BankFreezeDaoImpl extends BankFreezeBaseDao implements BankFreezeDao {
+	
+	@Override
+	public boolean subtractFreezeAmount(int customerId,int accountType, int amount) {
+		BankFreezeUpdate update = new BankFreezeUpdate()
+				.set.amount().applyFunc("amount - ?",amount).end()
+				.where.customerId().eq(customerId).and.accountType().eq(accountType).and.amount().ge(amount).end();
+		return this.mapper.updateBy(update) > 0;
+	}
+
+	@Override
+	public boolean addFreezeAmount(int customerId, int accountType,int amount) {
+		BankFreezeUpdate update = new BankFreezeUpdate()
+				.set.amount().applyFunc("amount + ?",amount).end()
+				.where.customerId().eq(customerId).and.accountType().eq(accountType).end();
+		return this.mapper.updateBy(update) > 0;
+	}
 }

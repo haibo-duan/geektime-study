@@ -45,7 +45,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Override
 	@HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
 	public void subtractAccountBalance(int customerId, int amount) {
-		if(bankAccountDao.subtractAccountBalance(customerId,amount)){
+		if(bankAccountDao.subtractAccountBalance(customerId,1,amount)){
 			log.info("账户 {} 扣减金额 {} 成功！！！",customerId,amount);
 		}else {
 			throw new HmilyRuntimeException("账户扣减异常！");
@@ -61,7 +61,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Transactional(rollbackFor = Exception.class)
 	public boolean confirm(int customerId, int amount) {
 		log.info("============dubbo tcc 执行确认付款接口===============");
-		if(bankFreezeDao.addFreezeAmount(customerId,amount)){
+		if(bankFreezeDao.addFreezeAmount(customerId,1,amount)){
 			final int i = confrimCount.incrementAndGet();
 			log.info("bank1 冻结操作成功，调用bank2的接口。");
 			bank2Service.transfer(customerId,amount);
@@ -75,9 +75,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Transactional(rollbackFor = Exception.class)
 	public boolean cancel(int customerId, int amount) {
 		log.info("============ dubbo tcc 执行取消付款接口===============");
-		if(bankFreezeDao.subtractFreezeAmount(customerId,amount)){
+		if(bankFreezeDao.subtractFreezeAmount(customerId,1,amount)){
 			log.info("取消操作，解除冻结金额成功!");
-			bankAccountDao.addAccountBalance(customerId,amount);
+			bankAccountDao.addAccountBalance(customerId,1,amount);
 			log.info("增加账户余额!");
 		}else {
 			log.info("cancel操作执行失败！！！");

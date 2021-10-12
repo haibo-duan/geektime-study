@@ -12,7 +12,7 @@ import com.dhb.bank.transfer.orm.entity.BankAccountEntity;
  */
 public interface BankAccountDao extends IBaseDao<BankAccountEntity> {
 
-	boolean subtractAccountBalance(int customerId, int amount);
+	boolean subtractAccountBalance(int customerId,int accountType, int amount);
 
-	boolean addAccountBalance(int customerId,int amount);
+	boolean addAccountBalance(int customerId,int accountType,int amount);
 }

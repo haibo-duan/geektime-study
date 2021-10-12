@@ -11,4 +11,9 @@ import com.dhb.bank.transfer.orm.entity.BankFreezeEntity;
  * <p/>@author Powered By Fluent Mybatis
  */
 public interface BankFreezeDao extends IBaseDao<BankFreezeEntity> {
+
+	boolean subtractFreezeAmount(int customerId, int accountType,int amount);
+
+	boolean addFreezeAmount(int customerId,int accountType,int amount);
+	
 }

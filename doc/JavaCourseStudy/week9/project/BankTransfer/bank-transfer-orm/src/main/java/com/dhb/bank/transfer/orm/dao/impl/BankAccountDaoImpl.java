@@ -16,18 +16,18 @@ import org.springframework.stereotype.Repository;
 public class BankAccountDaoImpl extends BankAccountBaseDao implements BankAccountDao {
 
 	@Override
-	public boolean subtractAccountBalance(int customerId, int amount) {
+	public boolean subtractAccountBalance(int customerId,int accountType, int amount) {
 		BankAccountUpdate update = new BankAccountUpdate()
-				.set.balance().applyFunc("amount - ?",amount).end()
-				.where.customerId().eq(customerId).end();
+				.set.balance().applyFunc("balance - ?",amount).end()
+				.where.customerId().eq(customerId).and.accountType().eq(accountType).and.balance().ge(amount).end();
 		return this.mapper.updateBy(update) > 0;
 	}
 
 	@Override
-	public boolean addAccountBalance(int customerId, int amount) {
+	public boolean addAccountBalance(int customerId,int accountType, int amount) {
 		BankAccountUpdate update = new BankAccountUpdate()
-				.set.balance().applyFunc("amount + ?",amount).end()
-				.where.customerId().eq(customerId).end();
+				.set.balance().applyFunc("balance + ?",amount).end()
+				.where.customerId().eq(customerId).and.accountType().eq(accountType).end();
 		return this.mapper.updateBy(update) > 0;
 	}
 }

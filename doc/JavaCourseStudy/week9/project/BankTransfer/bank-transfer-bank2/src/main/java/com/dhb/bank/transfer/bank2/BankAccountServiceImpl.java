@@ -38,7 +38,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Override
 	@HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
 	public void addAccountBalance(int customerId, int amount) {
-		if (bankAccountDao.addAccountBalance(customerId, amount)) {
+		if (bankAccountDao.addAccountBalance(customerId,1, amount)) {
 			log.info("账户 {} 收款金额 {} 成功！！！", customerId, amount);
 		} else {
 			throw new HmilyRuntimeException("账户收款异常！");
