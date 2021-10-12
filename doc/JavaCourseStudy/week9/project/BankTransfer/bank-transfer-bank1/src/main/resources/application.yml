@@ -33,23 +33,6 @@ spring.datasource.password: mysql
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 
 
-org:
-  dromara:
-    hmily :
-      serializer : kryo
-      recoverDelayTime : 30
-      retryMax : 30
-      scheduledDelay : 30
-      scheduledThreadMax :  10
-      repositorySupport : db
-      started: true
-      hmilyDbConfig :
-        driverClassName  : com.mysql.jdbc.Driver
-        url :  jdbc:mysql://192.168.161.114:3306/gts01?useSSL=false&autoReconnect=true&characterEncoding=UTF-8&serverTimezone=UTC
-        username : gts
-        password : mysql
-
-
 logging.level:
   root: info
   org.springframework: debug
