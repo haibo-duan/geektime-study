@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.dhb.bank.transfer.orm.dao", "com.dhb.bank.transfer.bank2"})
 @MapperScan(basePackages = {"com.dhb.bank.transfer.orm.mapper"})
-public class BankTransferBank2Application {
+public class DubboServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BankTransferBank2Application.class, args);
+		SpringApplication.run(DubboServerApplication.class, args);
 	}
 
 }

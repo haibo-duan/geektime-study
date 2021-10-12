@@ -13,7 +13,7 @@ public class Bank2ServiceImpl implements Bank2Service {
 
 	@Override
 	public Boolean transfer(int customerId, int amount) {
-		this.bankAccountService.subtractAccountBalance(customerId,amount);
+		this.bankAccountService.addAccountBalance(customerId,amount);
 		return true;
 	}
 }
