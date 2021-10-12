@@ -30,14 +30,6 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Autowired
 	BankFreezeDao bankFreezeDao;
 	
-	@Autowired
-	TryLogDao tryLogDao;
-	
-	@Autowired
-	CancelLogDao cancelLogDao;
-	
-	@Autowired
-	ConfirmLogDao confirmLogDao;
 
 	@DubboReference(version = "1.0.0")
 	Bank2Service bank2Service;

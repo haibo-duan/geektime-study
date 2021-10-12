@@ -19,15 +19,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
 	@Autowired
 	BankAccountDao bankAccountDao;
-
-	@Autowired
-	TryLogDao tryLogDao;
-
-	@Autowired
-	CancelLogDao cancelLogDao;
-
-	@Autowired
-	ConfirmLogDao confirmLogDao;
+	
 
 
 	@Override
