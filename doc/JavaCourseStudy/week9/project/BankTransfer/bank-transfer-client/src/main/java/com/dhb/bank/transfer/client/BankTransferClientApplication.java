@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.UUID;
+
 @SpringBootApplication
 @Slf4j
 public class BankTransferClientApplication {
@@ -25,7 +27,8 @@ public class BankTransferClientApplication {
 		return args -> {
 			int customerid = 10000;
 			int amount = 500;
-			bank1Service.transfer(customerid,amount);
+			String tid = UUID.randomUUID().toString();
+			bank1Service.transfer(tid,customerid,amount);
 			log.info("customerid {} transfer amount {} ...",customerid,amount);
 		};
 	}
