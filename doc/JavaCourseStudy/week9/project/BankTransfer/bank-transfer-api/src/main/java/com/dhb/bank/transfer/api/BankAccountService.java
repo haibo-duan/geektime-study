@@ -1,11 +1,9 @@
 package com.dhb.bank.transfer.api;
 
-import org.dromara.hmily.annotation.Hmily;
-
 public interface BankAccountService {
 
-	@Hmily
-	void subtractAccountBalance(int customerId,int amount);
-	@Hmily
-	void addAccountBalance(int customerId,int amount);
+
+	void subtractAccountBalance(String tid,int customerId, int amount);
+
+	void addAccountBalance(String tid,int customerId, int amount);
 }
