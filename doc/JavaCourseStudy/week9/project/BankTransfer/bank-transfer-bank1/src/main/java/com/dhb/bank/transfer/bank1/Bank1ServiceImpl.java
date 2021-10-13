@@ -12,8 +12,8 @@ public class Bank1ServiceImpl implements Bank1Service {
 	BankAccountService bankAccountService;
 
 	@Override
-	public Boolean transfer(int customerId, int amount) {
-		this.bankAccountService.subtractAccountBalance(customerId,amount);
+	public Boolean transfer(String tid,int customerId, int amount) {
+		this.bankAccountService.subtractAccountBalance(tid,customerId,amount);
 		return true;
 	}
 }
