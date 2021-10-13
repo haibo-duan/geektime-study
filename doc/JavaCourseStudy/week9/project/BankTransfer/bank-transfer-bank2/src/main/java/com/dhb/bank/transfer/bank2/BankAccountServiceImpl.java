@@ -20,33 +20,60 @@ public class BankAccountServiceImpl implements BankAccountService {
 	@Autowired
 	BankAccountDao bankAccountDao;
 	
+	@Autowired
+	TryLogDao tryLogDao;
 
+	@Autowired
+	ConfirmLogDao confirmLogDao;
 
+	@Autowired
+	CancelLogDao cancelLogDao;
+	
 	@Override
-	public void subtractAccountBalance(int customerId, int amount) {
+	public void subtractAccountBalance(String tid,int customerId, int amount) {
 
 	}
 
 	@Override
 	@HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
-	public void addAccountBalance(int customerId, int amount) {
-		if (bankAccountDao.addAccountBalance(customerId,1, amount)) {
-			log.info("账户 {} 收款金额 {} 成功！！！", customerId, amount);
-		} else {
-			throw new HmilyRuntimeException("账户收款异常！");
+	public void addAccountBalance(String tid,int customerId, int amount) {
+		log.info("bank2 addAccountBalance try begin ... tid is {} customerId is {} amount is {} ！！！", tid, customerId, amount);
+		//幂等校验 
+		if(!tryLogDao.isExist(tid)) {
+			tryLogDao.addTry(tid);
 		}
+		log.info("bank2 addAccountBalance try end ... tid is {} customerId is {} amount is {} ！！！", tid, customerId, amount);
+
 	}
 
 
 	@Transactional(rollbackFor = Exception.class)
-	public boolean confirm(int customerId, int amount) {
-		log.info("============dubbo tcc 执行确认收款接口===============");
+	public boolean confirm(String tid,int customerId, int amount) {
+		log.info("bank2 confirm begin ... tid is {} customerId is {} amount is {} ！！！", tid, customerId, amount);
+		//幂等校验 且try执行完成
+		if(!confirmLogDao.isExist(tid)){
+			if(tryLogDao.isExist(tid)) {
+				bankAccountDao.addAccountBalance(customerId, 1, amount);
+				log.info("账户 {} 收款金额 {} 成功！！！", customerId, amount);
+				confirmLogDao.addConfirm(tid);
+			}
+		}
+		log.info("bank2 confirm end ... tid is {} customerId is {} amount is {} ！！！", tid, customerId, amount);
 		return Boolean.TRUE;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
-	public boolean cancel(int customerId, int amount) {
-		log.info("============ dubbo tcc 收款取消付款接口===============");
+	public boolean cancel(String tid,int customerId, int amount) {
+		log.info("bank2 cancel begin ... tid is {} customerId is {} amount is {} ！！！", tid, customerId, amount);
+		//幂等校验 且try执行完毕
+		if(!cancelLogDao.isExist(tid)){
+			if(tryLogDao.isExist(tid)) {
+				bankAccountDao.subtractAccountBalance(customerId, 1, amount);
+				cancelLogDao.addCancel(tid);
+			}
+		}
+
+		log.info("bank2 cancel end ... tid is {} customerId is {} amount is {} ！！！", tid, customerId, amount);
 		return Boolean.TRUE;
 	}
 

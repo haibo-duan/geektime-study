@@ -12,8 +12,8 @@ public class Bank2ServiceImpl implements Bank2Service {
 	BankAccountService bankAccountService;
 
 	@Override
-	public Boolean transfer(int customerId, int amount) {
-		this.bankAccountService.addAccountBalance(customerId,amount);
+	public Boolean transfer(String tid,int customerId, int amount) {
+		this.bankAccountService.addAccountBalance(tid,customerId,amount);
 		return true;
 	}
 }
