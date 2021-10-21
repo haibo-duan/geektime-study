@@ -5,6 +5,7 @@ spring:
   redis:
     host: 192.168.161.114
     port: 6379
+    database: 0
     password: NULL
     timeout: 30000
     jedis:
@@ -13,4 +14,11 @@ spring:
         max-active: 10
         max-idle: 8
         min-idle: 0
-   
+    lettuce:
+      pool:
+        max-wait: 30000
+        max-active: 10
+        max-idle: 8
+        min-idle: 0
+      shutdown-timeout: 100
+      cache-null-values: false
