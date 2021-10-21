@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.io.Serializable;
 
-@Configuration
+//@Configuration
 @Slf4j
 public class LettuceConfig {
 	@Bean(name = "lettuceTemplate")
