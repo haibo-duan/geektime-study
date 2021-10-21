@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 192.168.161.114
+    port: 6379
+    password: NULL
+    timeout: 30000
+    jedis:
+      pool:
+        max-wait: 30000
+        max-active: 10
+        max-idle: 8
+        min-idle: 0
+   
