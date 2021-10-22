@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.JedisPool;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public class TestLockController {
 
 	@Autowired
-	RedisLock redisLock;
+	JedisPool jedisPool;
 
 	private SnowFlake snowFlake = new SnowFlake(1, 1);
 	
@@ -34,11 +34,12 @@ public class TestLockController {
 				//通过Snowflake算法获取唯一的ID字符串
 				String id = "" + snowFlake.nextId();
 				log.info("id {} 开始获取redis的锁...",id);
+				RedisLock lock = new RedisLock(jedisPool);
 				try {
-					redisLock.lock(id);
+					lock.lock(id,30000L);
 					count++;
 				} finally {
-					redisLock.unlock(id);
+					lock.unlock(id);
 					log.info("id {} 释放redis的锁...",id);
 				}
 				countDownLatch.countDown();
@@ -47,6 +48,6 @@ public class TestLockController {
 		countDownLatch.await();
 		long end = System.currentTimeMillis();
 		log.info("执行线程数:{},总耗时:{},count数为:{}",clientcount,end-start,count);
-		return "";
+		return "OK";
 	}
 }
