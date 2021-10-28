@@ -54,6 +54,12 @@
             <groupId>org.messaginghub</groupId>
             <artifactId>pooled-jms</artifactId>
         </dependency>
+ <!--       <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>5.16.3</version>
+        </dependency>-->
+        
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
