@@ -25,7 +25,7 @@ public class ActiveMQTest {
 	
 	public static void testDestination(Destination destination) {
 		try {
-			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://192.168.161.114:61616");
+			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://127.0.0.1:61616");
 			ActiveMQConnection conn = (ActiveMQConnection) factory.createConnection();
 			conn.start();
 			Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
