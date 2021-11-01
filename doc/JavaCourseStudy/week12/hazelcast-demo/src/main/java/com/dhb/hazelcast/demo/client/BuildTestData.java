@@ -4,9 +4,9 @@ import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.core.HazelcastInstance;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StopWatch;
 
 import java.util.Map;
-import java.util.stream.IntStream;
 
 @Slf4j
 public class BuildTestData {
@@ -17,14 +17,22 @@ public class BuildTestData {
 		clientConfig.setClusterName("hazelcast-cluster");
 		HazelcastInstance instance = HazelcastClient.newHazelcastClient(clientConfig);
 		Map<Integer, String> clusterMap = instance.getMap("map");
-
+		StopWatch stopWatch = new StopWatch();
 		log.info("begin put data ...");
-		for(int i=0;i<count;i++){
-			clusterMap.put(i,i+"");
+		int k = 0;
+		stopWatch.start(k + "");
+		for (int i = 0; i < count; i++) {
+			clusterMap.put(i, i + "");
+			int j = i / 10000;
+			if (j > 0 && j > k) {
+				k = j;
+				stopWatch.stop();
+				stopWatch.start(k + "");
+				log.info("已插入数据 {} 万条。", k);
+			}
 		}
-		log.info("end put data ...");
+		stopWatch.stop();
+		log.info("end put data ... {}", stopWatch.prettyPrint());
 		instance.shutdown();
 	}
-	
-	
 }
