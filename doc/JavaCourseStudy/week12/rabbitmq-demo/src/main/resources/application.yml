@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: 192.168.161.114
+    port: 5672
+    username: root
+    password: 123456
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual # ????
+        concurrency: 5 # ????????
+        max-concurrency: 10 # ????????
+        prefetch: 5 # ?????????????
+    cache:
+      channel:
+        size: 50 # ???channel??
+
+rabbitmq-demo:
+  defaultExchange: amqpExchange
+  queue: queue
+  routeKey: queue_key
