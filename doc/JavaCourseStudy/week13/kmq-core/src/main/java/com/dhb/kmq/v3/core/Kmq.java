@@ -1,12 +1,15 @@
 package com.dhb.kmq.v3.core;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.LockSupport;
 
+@Slf4j
 public class Kmq {
 	public Kmq(String topic, int capacity) {
 		this.topic = topic;
@@ -35,7 +38,7 @@ public class Kmq {
 	}
 
 	/**
-	 * 考虑到v1中的blockingQueue获取不到内容会一直阻塞，此处用sleep循环暂时替代
+	 * 考虑到v1中的blockingQueue获取不到内容会一直阻塞
 	 * @param index
 	 * @return
 	 */
@@ -45,7 +48,8 @@ public class Kmq {
 			if(size.get() > index) {
 				return queue[index];
 			}else {
-				TimeUnit.MILLISECONDS.sleep(500);
+				log.info("Thread park ...");
+				LockSupport.park();
 			}
 		}
 	}
@@ -57,7 +61,7 @@ public class Kmq {
 			if (size.get() > index) {
 				return queue[index];
 			} else {
-				TimeUnit.MILLISECONDS.sleep(500);
+				LockSupport.parkUntil(TimeUnit.MILLISECONDS,timeout);
 				if(System.currentTimeMillis() - start >= timeout) {
 					return null;
 				}
