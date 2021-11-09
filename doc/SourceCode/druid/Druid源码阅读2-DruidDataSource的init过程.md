@@ -16,7 +16,7 @@ init方法是使用 DruidDataSource的入口。
 
 ## 1.1 double check 
 判断inited状态，这样确保init方法在同一个DataSource对象中只会被执行一次。（后面有加锁）。
-之后内部开启要给ReentrantLock。这个lock调用lockInterruptibly。
+之后内部开启要给ReentrantLock。这个lock调用lockInterruptibly。 如果获取不到lock,则会将当前的线程休眠。
 再次检测inited状态。如果为true,则返回。这里做了一个DoubleCheck。
 定义initStackTrace ，为后续需要getInitStackTrace方法使用。
 
@@ -88,5 +88,6 @@ finally处理逻辑：
 
 # 2.总结
 init过程，对DruidDataSource进行了初始化操作，为了防止多线程并发场景下进行init操作，采用了Double Check的方式，配合ReentrentLock两次判断来实现。
-
+详细流程如下图：
+![init方法执行流程](../images/init方法执行流程.png)
 
