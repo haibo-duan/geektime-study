@@ -51,12 +51,26 @@ connections = new DruidConnectionHolder[maxActive];
 evictConnections = new DruidConnectionHolder[maxActive];
 keepAliveConnections = new DruidConnectionHolder[maxActive];
 ```
-
+## 1.3 创建连接
 判断是否进行异步初始化： if (createScheduler != null && asyncInit) 。
 如果异步初始化，调用通过submitCreateTask进行。
-如果poolingCount < initialSize，则创建物理连接。但是在默认的的初始化过程中，如果不通过其他配置参数指定，这个条件不会被触发，这可以看做是DruidDataSource的懒加载，只有真正需要Connection的时候，才会去创建物理的连接。
+如果poolingCount < initialSize，则创建物理连接。
+如果initialSize不配置为0，在初始化过程中，这个条件不会被触发，这样只有真正需要Connection的时候，才会去创建物理的连接。
+如果指定了initialSize，则在初始化的过程中，初始化线程就创建了initialSize的连接的holder并放置到connections中。
+```
+//判断当前在pool中的holder数量是否小于初始化参数指定的initialSize
+ while (poolingCount < initialSize) {
+    try {
+        PhysicalConnectionInfo pyConnectInfo = createPhysicalConnection();
+        DruidConnectionHolder holder = new DruidConnectionHolder(this, pyConnectInfo);
+        connections[poolingCount++] = holder;
+        
+        ... ...
+```
+在同步初始化的条件下，初始化操作将通过init线程进行。而后续由于连接池使用过程中动态的收缩和扩展，则是由其他单独的线程来完成。
+反之，如果需要进行异步初始化，则会调用submitCreateTask方法来异步进行。
 
-## 1.3 创建线程
+## 1.4 创建线程
 创建如下线程：
 ```
 //创建日志线程  但是这个线程的条件timeBetweenLogStatsMillis大于0，如果这个参数没有配置，日志线程不会创建。
@@ -75,7 +89,7 @@ initedLatch会在createAndStartCreatorThread与createAndStartDestroyThread都执
 之后 init 状态为true,并初始化initedTime时间为当前的Date时间。注册registerMbean。
 如果keepAlive为true,还需调用submitCreateTask方法，将连接填充到minIdle。确保空闲的连接可用。
 
-## 1.4 finally处理
+## 1.5 finally处理
 finally处理逻辑：
 修改inited为true,并解锁。
 判断init和日志的INFO状态，打印一条init完成的日志。
