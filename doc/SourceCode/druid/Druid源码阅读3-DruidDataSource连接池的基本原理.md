@@ -220,7 +220,7 @@ DruidDataSource启动之后，会启动三个线程，分别是：
 生产者和消费者模型通过ReentrentLock的两个Condition：empty和notEmpty。来实现生产者和消费者的阻塞和通知。
 这个消费者模型中，生产者只有一个线程CreateConnectionThread，而消费者包括用户线程和定始调用的销毁线程DestroyConnectionThread。
 这个过程可以用如下图表示：
-![DruidDataSource基本原理](../images/DruidDataSource基本原理.png)
+![DruidDataSource基本原理](DruidDataSource基本原理.png)
 
 
 

@@ -77,7 +77,7 @@ DruidPooledConnection的数据结构如下表：
 
 上述几个关键的类，其相互关系如下图：
 
-![DruidDataSource与DruidConnectionHolder相互关系](../images/DruidDataSource与DruidConnectionHolder相互关系.png)
+![DruidDataSource与DruidConnectionHolder相互关系](DruidDataSource与DruidConnectionHolder相互关系.png)
 
 个人感觉，DruidConnectionHolder与DruidPooledConnection，实际上是对连接进行了分层。将频繁变更的内容抽象到了DruidConnectionHolder类。
 而DruidPooledConnection则存放了Statement的的缓存pool。
