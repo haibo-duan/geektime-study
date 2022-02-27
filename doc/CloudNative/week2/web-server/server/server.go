@@ -27,14 +27,20 @@ func handler_hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("body = ", r.Body)
 	fmt.Println(r.RemoteAddr, "连接成功")
 
-	w.WriteHeader(http.StatusOK)
 	for name, values := range r.Header {
 		for _, value := range values {
 			fmt.Println(name, value)
-			w.Header().Set(name, value)
+			_, exits := w.Header()[name]
+			if exits {
+				w.Header().Add(name, value)
+			} else {
+				w.Header().Set(name, value)
+			}
 		}
 	}
 	VERSION := os.Getenv("VERSION")
+	fmt.Println("VERSION is ：", VERSION)
 	w.Header().Set("VERSION", VERSION)
+	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("hello http server"))
 }
