@@ -10,7 +10,7 @@ import (
 func main() {
 	http.HandleFunc("/hello", handler_hello)
 	http.HandleFunc("/healthz", handler_healthz)
-	http.ListenAndServe("127.0.0.1:8080", nil)
+	http.ListenAndServe("127.0.0.1:8360", nil)
 }
 
 func handler_healthz(w http.ResponseWriter, r *http.Request) {
