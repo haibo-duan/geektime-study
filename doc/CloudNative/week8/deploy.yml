@@ -37,3 +37,13 @@ metadata:
           port: liveness-port  
         failureThreshold: 30  
         periodSeconds: 10
+
+      resources:                    # 容器CPU及menory资源限制
+        limits:
+          cpu: '1'
+          memory: "300Mi"
+        requests:
+          cpu: "0.6"
+          memory: "50Mi"
+    
+    
