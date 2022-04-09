@@ -1,0 +1,39 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:  
+  name: httpserver
+  namespace: default
+  labels:    
+    app: httpserver
+    version: stable
+    spec:      
+      imagePullSecrets:      
+        - name: harborsecret
+        containers:      
+        - name: httpserver        
+        image: haiboduan/httpserver:0.0.1       
+        ports:        
+          - con tainerPort: 8080
+      readinessProbe: #Probe 探针
+        httpGet:
+          path: /healthz
+          port: 8360
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 5
+      livenessProbe: # 探测指针 决定是否重启容器
+        failureThreshold: 3
+        httpGet:
+          path: /healthz
+          port: 8360
+          scheme: HTTP
+        initialDelaySeconds: 75
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 10
+      startupProbe: #Startup Probe 慢启动容器
+        httpGet:    
+          path: /healthz    
+          port: liveness-port  
+        failureThreshold: 30  
+        periodSeconds: 10
