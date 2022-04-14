@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: httpserver
+spec:
+  containers:
+    - name: httpserver
+      image: haiboduan/httpserver:0.0.1
+      lifecycle:
+        postStart:
+          exec:
+            command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+        preStop:
+          exec: #优雅地终止
+            command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
