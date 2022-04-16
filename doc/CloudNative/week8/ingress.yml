@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: httpserver-80                                                    # ingress Name
+  namespace: default                                              # 命名空间
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2                    # 路径重回
+    nginx.ingress.kubernetes.io/ssl-redirect: false                    # 同时支持 HTTP 和 HTTPS
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: off                  # 启用或禁用对代理HTTPS服务器证书的验证
+    nginx.ingress.kubernetes.io/ssl-prefer-server-ciphers: "true"      # 服务器应优先于客户端
+    nginx.ingress.kubernetes.io/proxy-ssl-verify-depth: 1              # 设置代理HTTPS服务器证书链中的验证深度，默认为1
+    nginx.ingress.kubernetes.io/proxy-ssl-protocols:                   # 启用对代理HTTPS服务器的请求的指定协议。
+    nginx.ingress.kubernetes.io/proxy-body-size: "50M"                 # 代理文件大小限制 M
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: 300             # 代理超时 ms
+    nginx.ingress.kubernetes.io/proxy-read-timeout:  300               # 代理读取超时 ms
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 300                # 代理发送超时 ms
+    nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "1024M"      # 代理最大文件大小
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: 300       # 代理下一个上游超时 ms
+    nginx.ingress.kubernetes.io/proxy-next-upstream-tries: 300         # 代理下一个上游尝试 ms
+    nginx.ingress.kubernetes.io/proxy-request-buffering: 300           # 代理请求缓冲 ms
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: httpserver.dhb.cn                                             # 解析的域名
+      http:
+        paths:
+          - backend:
+              service:
+                name: httpserver
+                port: 80                            
+  tls:                                                                  # 开启绑定 ssl
+    - hosts:
+        - httpserver.dhb.cn                                              # 添加 ssl
+      secretName: all-dhb-cn                                       # ssl 对应的 secret

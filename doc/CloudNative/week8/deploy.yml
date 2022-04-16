@@ -1,18 +1,18 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
-metadata:  
+metadata:
   name: httpserver
   namespace: default
-  labels:    
+  labels:
     app: httpserver
     version: stable
-    spec:      
-      imagePullSecrets:      
+    spec:
+      imagePullSecrets:
         - name: harborsecret
-        containers:      
-        - name: httpserver        
-        image: haiboduan/httpserver:0.0.1       
-        ports:        
+        containers:
+          - name: httpserver
+        image: haiboduan/httpserver:0.0.1
+        ports:
           - con tainerPort: 8080
       readinessProbe: #Probe 探针
         httpGet:
@@ -32,12 +32,16 @@ metadata:
         successThreshold: 1
         timeoutSeconds: 10
       startupProbe: #Startup Probe 慢启动容器
-        httpGet:    
-          path: /healthz    
-          port: liveness-port  
-        failureThreshold: 30  
+        httpGet:
+          path: /healthz
+          port: liveness-port
+        failureThreshold: 30
         periodSeconds: 10
-
+      lifecycle:  
+        postStart:
+          exec:
+            command:
+            - /stop.sh
       resources:                    # 容器CPU及menory资源限制
         limits:
           cpu: '1'
@@ -45,5 +49,3 @@ metadata:
         requests:
           cpu: "0.6"
           memory: "50Mi"
-    
-    

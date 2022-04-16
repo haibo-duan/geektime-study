@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: httpserver
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 8360
+      targetPort: 8360
